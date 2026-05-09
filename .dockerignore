@@ -1,0 +1,9 @@
+.git
+.gitignore
+.dockerignore
+*.md
+*.bat
+.claude
+.vscode
+.idea
+node_modules

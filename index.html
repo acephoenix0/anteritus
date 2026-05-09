@@ -1,0 +1,3026 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anteritus · 전생</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-0: #0a0c14;
+    --bg-1: #11131e;
+    --bg-2: #1a1c2a;
+    --ivory: #ece4d3;
+    --ivory-soft: #c9c1b0;
+    --mute: #7d7589;
+    --gold: #c9a961;
+    --gold-soft: #d8be8a;
+    --rose: #c98686;
+    --teal: #6b9c95;
+    --line: rgba(236, 228, 211, 0.15);
+    --line-strong: rgba(236, 228, 211, 0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-0);
+    color: var(--ivory);
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    font-weight: 300;
+  }
+
+  /* Cosmic gradient backdrop */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 169, 97, 0.10), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201, 134, 134, 0.07), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 10% 70%, rgba(107, 156, 149, 0.06), transparent 60%);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(1px 1px at 70% 65%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 80%, var(--gold-soft) 50%, transparent 100%),
+      radial-gradient(1px 1px at 85% 15%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(1px 1px at 55% 50%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(1px 1px at 15% 90%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(2px 2px at 90% 75%, var(--rose) 50%, transparent 100%),
+      radial-gradient(1px 1px at 30% 10%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(1px 1px at 75% 40%, var(--ivory-soft) 50%, transparent 100%),
+      radial-gradient(1px 1px at 5% 50%, var(--ivory-soft) 50%, transparent 100%),
+      radial-gradient(1px 1px at 60% 25%, var(--ivory) 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 25% 60%, var(--gold-soft) 50%, transparent 100%);
+    opacity: 0.55;
+    animation: twinkle 10s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { 0%,100% { opacity: 0.45; } 50% { opacity: 0.8; } }
+
+  /* ============= TOP NAV ============= */
+  header.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(10, 12, 20, 0.7);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .nav .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--ivory);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .nav .brand .ko {
+    color: var(--mute);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    margin-left: 0.6em;
+  }
+  .nav .links {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .nav .links a {
+    color: var(--ivory-soft);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    padding: 0.4rem 0.7rem;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+  }
+  .nav .links a:hover { color: var(--ivory); border-color: var(--line); }
+  .nav .links a.active { color: var(--gold); border-color: rgba(201, 169, 97, 0.4); }
+  @media (max-width: 600px) {
+    header.nav { padding: 0.7rem 1rem; flex-direction: column; align-items: flex-start; }
+    .nav .links a { font-size: 0.62rem; padding: 0.3rem 0.5rem; letter-spacing: 0.15em; }
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 7rem 1.5rem 3rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 760px;
+    display: none;
+    animation: fadeUp 0.8s ease-out;
+  }
+  .page.active { display: block; }
+  .page.narrow { max-width: 560px; }
+  .page.home    { max-width: 720px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .scene {
+    display: none;
+    animation: fadeUp 0.7s ease-out;
+  }
+  .scene.active { display: block; }
+
+  /* ============= TYPO HELPERS ============= */
+  .label-tag {
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+  }
+  .display {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ivory);
+    line-height: 1.1;
+    letter-spacing: 0.005em;
+  }
+  .ko-line {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    color: var(--ivory-soft);
+    letter-spacing: 0.04em;
+  }
+  .rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: var(--mute);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+  }
+  .rule::before, .rule::after {
+    content: ""; flex: 1; max-width: 80px; height: 1px; background: var(--line);
+  }
+
+  /* ============= BUTTONS ============= */
+  .btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--ivory);
+    color: var(--ivory);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.74rem;
+    letter-spacing: 0.4em;
+    padding: 1rem 2.4rem 1rem 2.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ivory);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
+  .btn:hover { color: var(--bg-0); }
+  .btn:hover::before { transform: scaleX(1); }
+  .btn-gold { border-color: var(--gold); color: var(--gold); }
+  .btn-gold::before { background: var(--gold); }
+  .btn-gold:hover { color: var(--bg-0); }
+  .btn-rose { border-color: var(--rose); color: var(--rose); }
+  .btn-rose::before { background: var(--rose); }
+  .btn-rose:hover { color: var(--bg-0); }
+
+  .btn-ghost {
+    background: transparent;
+    border: none;
+    color: var(--mute);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+  .btn-ghost:hover { color: var(--ivory); }
+
+  /* ============= HOME ============= */
+  .home { text-align: center; }
+  .emblem {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 2rem;
+    opacity: 0.85;
+  }
+  .home h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(3.5rem, 11vw, 5.5rem);
+    color: var(--ivory);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.01em;
+  }
+  .home .ko-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    color: var(--ivory-soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.6em;
+    margin-bottom: 2.5rem;
+    padding-left: 0.6em;
+  }
+  .home .lede {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--ivory-soft);
+    font-weight: 300;
+    margin: 0 auto 3rem;
+    letter-spacing: 0.01em;
+    max-width: 540px;
+  }
+  .home .lede em {
+    color: var(--gold);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.06em;
+  }
+
+  .mode-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem auto 0;
+    max-width: 600px;
+  }
+  .mode-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.4rem;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: stretch;
+    column-gap: 1rem;
+  }
+  .mode-card:hover {
+    border-color: rgba(201, 169, 97, 0.5);
+    background: linear-gradient(180deg, rgba(201,169,97,0.06), rgba(255,255,255,0.005));
+    transform: translateY(-3px);
+  }
+  .mode-card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.35rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    align-self: center;
+  }
+  .mode-card .body-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .mode-card .body-col .title-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+  .mode-card .body-col .title-row h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--ivory);
+    margin: 0;
+    letter-spacing: 0.005em;
+    line-height: 1.15;
+  }
+  .mode-card .ko {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--gold-soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+  }
+  .mode-card p {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--ivory-soft);
+    font-size: 0.92rem;
+    line-height: 1.85;
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-top: 0.4rem;
+  }
+  .mode-card .arrow {
+    color: var(--mute);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    transition: color 0.3s;
+    white-space: nowrap;
+    align-self: flex-end;
+    margin-top: 1rem;
+  }
+  .mode-card:hover .arrow { color: var(--gold); }
+  @media (max-width: 600px) {
+    .mode-card { grid-template-columns: 1fr; column-gap: 0; padding: 1.4rem 1.4rem 1.2rem; }
+    .mode-card .num { text-align: left; font-size: 1.1rem; padding-top: 0; }
+    .mode-card .arrow { margin-top: 0.8rem; }
+  }
+
+  /* ============= FORM ============= */
+  .form .step-num {
+    display: inline-block;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+  .form h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.85rem;
+    color: var(--ivory);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.005em;
+  }
+  .form .sub {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--mute);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .field { margin-bottom: 1.6rem; }
+  .field label {
+    display: block;
+    color: var(--mute);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .field input,
+  .field select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding: 0.7rem 0.2rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--ivory);
+    outline: none;
+    transition: border-color 0.3s;
+    font-weight: 300;
+  }
+  .field input::placeholder { color: var(--mute); opacity: 0.5; }
+  .field input:focus,
+  .field select:focus { border-bottom-color: var(--gold); }
+  .field select option { background: var(--bg-2); color: var(--ivory); }
+  .field select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23c9a961' stroke-width='1.2' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    padding-right: 1.6rem;
+  }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .form .actions {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 2.5rem; gap: 1rem; flex-wrap: wrap;
+  }
+
+  /* Daily Echo — home banner (reference width for the home blocks below) */
+  .daily-echo {
+    margin: 0 auto 1.5rem;
+    max-width: 600px;
+    padding: 1.2rem 1.4rem;
+    background: rgba(201, 169, 97, 0.05);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    text-align: center;
+    position: relative;
+  }
+  .daily-echo .echo-date {
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .daily-echo .echo-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ivory);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.4rem;
+  }
+  .daily-echo .echo-line .ko {
+    display: block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    color: var(--ivory-soft);
+    font-size: 0.92rem;
+    margin-top: 0.4rem;
+    letter-spacing: 0.01em;
+    font-weight: 300;
+  }
+  .daily-echo .echo-source {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--ivory-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    font-weight: 300;
+  }
+  .daily-echo .echo-source .who { color: var(--gold-soft); }
+  .daily-echo .echo-cta {
+    display: inline-block;
+    margin-top: 0.7rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.35);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+  .daily-echo .echo-cta:hover {
+    color: var(--gold-soft);
+    border-bottom-color: var(--gold-soft);
+  }
+
+  /* Twin life secondary card */
+  .twin-card {
+    margin-top: 1rem;
+    padding: 1.4rem 1.5rem;
+    background: rgba(201, 134, 134, 0.04);
+    border: 1px solid rgba(201, 134, 134, 0.22);
+    position: relative;
+  }
+  .twin-card::before {
+    content: "TWIN · 또 다른 한 생";
+    position: absolute;
+    top: -0.55rem; left: 1.2rem;
+    background: var(--bg-0);
+    padding: 0 0.5rem;
+    color: var(--rose);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    font-weight: 500;
+  }
+  .twin-card .twin-era {
+    color: var(--rose);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .twin-card .twin-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--ivory);
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+  .twin-card .twin-orig {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--ivory-soft);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .twin-card .twin-line {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--ivory-soft);
+    font-size: 0.88rem;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  /* Map controls */
+  .map-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .map-search {
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ivory);
+    padding: 0.55rem 0.9rem;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .map-search:focus { border-color: var(--gold); }
+  .map-search::placeholder { color: var(--mute); }
+  .filter-pill {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ivory-soft);
+    padding: 0.4rem 0.7rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .filter-pill:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+  .filter-pill.active { background: var(--gold); color: var(--bg-0); border-color: var(--gold); }
+
+  /* Bond legend on map */
+  .bond-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.6rem;
+    color: var(--mute);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+  .bond-legend .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .bond-legend .swatch {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: var(--c, var(--gold));
+    border-radius: 1px;
+  }
+
+  /* New-soul entrance animation */
+  @keyframes nodePop {
+    0% { opacity: 0; transform: scale(0); }
+    60% { opacity: 1; transform: scale(1.6); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .map-canvas svg .node-group.new .node {
+    animation: nodePop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  /* Save / share button feedback */
+  .saving-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 12, 20, 0.85);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .saving-overlay.visible { display: flex; }
+  .saving-overlay .msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* Result page bottom CTA stack — 2 main buttons in a row, restart link below */
+  .result-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 3rem auto 0;
+    max-width: 460px;
+  }
+  .result-cta .cta-row {
+    display: flex;
+    gap: 0.9rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .result-cta .cta-row .btn {
+    flex: 1;
+    text-align: center;
+    padding: 1rem 0.6rem;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+  }
+  .result-cta .cta-row .btn.solo { flex: 1 1 100%; }
+  .result-cta .btn-ghost { margin-top: 0.2rem; }
+  @media (max-width: 480px) {
+    .result-cta .cta-row { flex-direction: column; }
+  }
+
+  /* dual-person form */
+  .person-block {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--line);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .person-block .person-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+  .person-block .person-sub {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--mute);
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.03em;
+  }
+  .picker-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .picker-group .picker-label {
+    font-size: 0.7rem;
+    color: var(--mute);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .saved-pick {
+    background: transparent;
+    border: 1px dashed var(--line-strong);
+    color: var(--ivory-soft);
+    padding: 0.4rem 0.8rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .saved-pick:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ============= LOADING ============= */
+  .loading { text-align: center; padding: 2rem 0; }
+  .compass {
+    width: 160px;
+    height: 160px;
+    margin: 2rem auto;
+    position: relative;
+  }
+  .compass svg { width: 100%; height: 100%; }
+  .ring-outer { animation: rotate 18s linear infinite; transform-origin: center; }
+  .ring-inner { animation: rotate 26s linear infinite reverse; transform-origin: center; }
+  .needle { animation: pulse 2.4s ease-in-out infinite; transform-origin: 80px 80px; }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+  .loading p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    font-size: 1.15rem;
+    margin-top: 1.5rem;
+  }
+  .loading .step {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--ivory-soft);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    margin-top: 0.6rem;
+    min-height: 1.4em;
+    font-weight: 300;
+  }
+
+  /* ============= RESULT ============= */
+  .result-card { margin-bottom: 2rem; }
+  .result-card .header { margin-bottom: 1.6rem; text-align: center; }
+  .era-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 0.4rem 1rem;
+    margin-bottom: 1.4rem;
+  }
+  .era-tag .dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+  .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    line-height: 1.15;
+    color: var(--ivory);
+    margin-bottom: 0.6rem;
+  }
+  .name-orig {
+    font-family: 'Inter', sans-serif;
+    color: var(--ivory-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .verse {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--gold);
+    padding: 1.6rem 1.8rem;
+    margin: 2rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+  }
+  .verse .ko {
+    display: block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-size: 0.92rem;
+    color: var(--ivory-soft);
+    margin-top: 0.5rem;
+    letter-spacing: 0;
+  }
+  .traits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 1.5rem 0;
+  }
+  .trait {
+    padding: 1.1rem 0.8rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+  .trait:nth-child(2n) { border-right: none; }
+  .trait:nth-last-child(-n+2) { border-bottom: none; }
+  .trait .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--mute);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .trait .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--ivory);
+    letter-spacing: 0.02em;
+  }
+  .trait .value.has-dot::before {
+    content: ""; display: inline-block;
+    width: 9px; height: 9px; border-radius: 50%;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    background: var(--dot, var(--gold));
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 0 12px var(--dot, var(--gold));
+  }
+  h3.section {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.66rem;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    margin: 2.2rem 0 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+    text-transform: uppercase;
+  }
+  p.body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.95;
+    color: var(--ivory-soft);
+    font-weight: 300;
+    font-size: 0.94rem;
+    letter-spacing: 0.01em;
+  }
+  .legacy {
+    margin-top: 1rem;
+    padding: 1.4rem;
+    background: rgba(201, 169, 97, 0.05);
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    position: relative;
+  }
+  .legacy::before, .legacy::after {
+    content: ""; position: absolute; width: 14px; height: 14px;
+  }
+  .legacy::before {
+    top: -1px; left: -1px;
+    border-top: 1px solid var(--gold); border-left: 1px solid var(--gold);
+  }
+  .legacy::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold);
+  }
+  .legacy .text {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--ivory);
+    line-height: 1.95;
+    font-size: 0.93rem;
+    font-weight: 300;
+  }
+
+  /* ============= BOND ============= */
+  .bond-pair {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 720px) {
+    .bond-pair { grid-template-columns: 1fr 1fr; }
+  }
+  .bond-pair .mini-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--line);
+    padding: 1.4rem;
+    text-align: center;
+  }
+  .mini-card .mini-name-input {
+    color: var(--ivory-soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .mini-card .mini-era {
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .mini-card .mini-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--ivory);
+    margin-bottom: 0.3rem;
+  }
+  .mini-card .mini-sign {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--ivory-soft);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .bond-meter {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--line);
+    padding: 1.6rem 1.8rem;
+    margin: 2rem 0;
+  }
+  .bond-meter .score-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 1rem; flex-wrap: wrap; gap: 0.6rem;
+  }
+  .bond-meter .score-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3.2rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .bond-meter .score-num .of {
+    color: var(--mute); font-size: 1.1rem; margin-left: 0.2em;
+  }
+  .bond-meter .score-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.4em;
+    color: var(--mute);
+    text-transform: uppercase;
+  }
+  .meter-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+    margin-top: 0.3rem;
+  }
+  .meter-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .bond-line {
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    border-left: 1px solid var(--line-strong);
+    color: var(--ivory);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.93rem;
+    line-height: 1.85;
+  }
+  .bond-line .small {
+    display: block;
+    color: var(--mute);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .bond-line .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  /* ============= MAP ============= */
+  .map-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--ivory);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.005em;
+  }
+  .map-page .sub {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--mute);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+  .map-stats {
+    display: flex; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    color: var(--ivory-soft);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+  .map-stats .stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.6rem;
+    margin-right: 0.5rem;
+  }
+  .map-canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(201, 169, 97, 0.04), transparent 70%),
+      var(--bg-1);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .map-canvas svg {
+    width: 100%; height: 100%; display: block;
+  }
+  .map-canvas .empty {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--mute); text-align: center; padding: 2rem;
+    gap: 1rem;
+  }
+  .map-canvas .empty .big {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.4rem; color: var(--ivory-soft);
+  }
+  .map-canvas .empty .sm {
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.04em; line-height: 1.7;
+  }
+  .map-tip {
+    margin-top: 1rem;
+    color: var(--mute);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .map-detail {
+    margin-top: 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.4rem;
+    min-height: 4rem;
+    display: none;
+  }
+  .map-detail.visible { display: block; }
+  .map-detail .name {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.4rem; color: var(--ivory); margin-bottom: 0.2rem;
+  }
+  .map-detail .info {
+    color: var(--ivory-soft); font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85rem; line-height: 1.8; font-weight: 300;
+  }
+  .map-detail .connections {
+    margin-top: 0.6rem;
+    color: var(--mute); font-size: 0.78rem;
+    font-family: 'Inter', sans-serif; letter-spacing: 0.03em;
+  }
+  .map-detail .connections .conn {
+    color: var(--gold-soft);
+  }
+
+  .map-actions {
+    display: flex; gap: 0.8rem; justify-content: flex-end; margin-top: 1.5rem; flex-wrap: wrap;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--mute);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.5em;
+    padding: 2rem 1rem 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    opacity: 0.55;
+  }
+
+  /* ============= MAP NODE STYLES ============= */
+  .map-canvas svg .edge { stroke-linecap: round; transition: stroke-opacity 0.3s; }
+  .map-canvas svg .node { cursor: pointer; transition: transform 0.3s; transform-origin: center; transform-box: fill-box; }
+  .map-canvas svg .node-group { cursor: pointer; }
+  .map-canvas svg .node-group:hover .node { transform: scale(1.4); }
+  .map-canvas svg .node-group .label {
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-size: 9px;
+    fill: var(--ivory-soft);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+  .map-canvas svg .node-group:hover .label { fill: var(--gold); }
+  .map-canvas svg .node-group.dim .node { opacity: 0.25; }
+  .map-canvas svg .node-group.dim .label { opacity: 0.25; }
+  .map-canvas svg .edge.dim { stroke-opacity: 0.08 !important; }
+  .map-canvas svg .edge.highlight { stroke: var(--gold) !important; stroke-opacity: 0.95 !important; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="#home" class="brand" data-route="home">Anteritus<span class="ko">전 생</span></a>
+  <nav class="links">
+    <a href="#home" data-route="home">Home · 메인</a>
+    <a href="#solo" data-route="solo">Solo · 전생 리포트</a>
+    <a href="#bond" data-route="bond">Bond · 인연의 실</a>
+    <a href="#map" data-route="map">Map · 영혼의 지도</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ===== HOME ===== -->
+  <section class="page home active" id="page-home">
+    <svg class="emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="28" stroke="#c9a961" stroke-width="0.8" fill="none" opacity="0.7"/>
+      <circle cx="32" cy="32" r="20" stroke="#c9a961" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <line x1="32" y1="4"  x2="32" y2="60" stroke="#c9a961" stroke-width="0.4" opacity="0.4"/>
+      <line x1="4"  y1="32" x2="60" y2="32" stroke="#c9a961" stroke-width="0.4" opacity="0.4"/>
+      <circle cx="32" cy="32" r="3" fill="#c98686" opacity="0.85"/>
+      <circle cx="32" cy="12" r="1.4" fill="#ece4d3"/>
+      <circle cx="52" cy="32" r="1.4" fill="#ece4d3"/>
+      <circle cx="32" cy="52" r="1.4" fill="#ece4d3"/>
+      <circle cx="12" cy="32" r="1.4" fill="#ece4d3"/>
+    </svg>
+    <div class="label-tag" style="margin-bottom:1.2rem;">Anteritus · Prior Lives</div>
+    <h1>Anteritus</h1>
+    <div class="ko-title">전 생</div>
+    <p class="lede">
+      별빛은 수천 년을 건너와 지금 이곳에 닿고,<br/>
+      어떤 기억은 시대를 건너 당신 안에 잠들어 있습니다.<br/>
+      <em>한 번 살았던 그 사람을, 그리고 그들의 인연을 만나러 갑니다.</em>
+    </p>
+
+    <div class="daily-echo" id="daily-echo" style="display:none;">
+      <div class="echo-date" id="daily-echo-date">— · — · —</div>
+      <div class="echo-line" id="daily-echo-line">"—"</div>
+      <div class="echo-source" id="daily-echo-source">—</div>
+    </div>
+
+    <div class="rule">Three Paths</div>
+
+    <div class="mode-grid">
+      <a class="mode-card" href="#solo" data-route="solo">
+        <div class="num">i.</div>
+        <div class="body-col">
+          <div class="title-row"><h3>Solo Report</h3><span class="ko">전생 리포트</span></div>
+          <p>당신의 별자리·원소를 짚어 한 시대를 살았던 그 사람을 불러냅니다.<br/>그 자리에서 자동으로 영혼의 지도에 등록됩니다.</p>
+          <div class="arrow">나의 전생 →</div>
+        </div>
+      </a>
+
+      <a class="mode-card" href="#bond" data-route="bond">
+        <div class="num">ii.</div>
+        <div class="body-col">
+          <div class="title-row"><h3>Bond Reading</h3><span class="ko">인연의 실</span></div>
+          <p>두 사람의 별과 시공간을 비교합니다.<br/>어느 하늘 아래에서 만났을지, 어떤 결로 서로를 키우는지.</p>
+          <div class="arrow">우리의 전생 →</div>
+        </div>
+      </a>
+
+      <a class="mode-card" href="#map" data-route="map">
+        <div class="num">iii.</div>
+        <div class="body-col">
+          <div class="title-row"><h3>Soul Map</h3><span class="ko">영혼의 지도</span></div>
+          <p>지금까지 등록된 영혼들과 그들의 인연을 별무리로 봅니다.<br/>가까운 별일수록 결이 닮은 영혼.</p>
+          <div class="arrow">네트워크 →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== SOLO ===== -->
+  <section class="page narrow" id="page-solo">
+    <div class="scene active form" id="solo-form">
+      <div class="step-num">i.</div>
+      <h2>Tell us where you arrived</h2>
+      <p class="sub">전생 리포트 · 당신을 나타내는 좌표를 알려주세요</p>
+
+      <div class="field">
+        <label>Name · 이름</label>
+        <input type="text" id="solo-name" placeholder="Your name" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label>Date of Arrival · 생년월일</label>
+        <input type="date" id="solo-birth" />
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Hue · 당신의 색</label>
+          <select id="solo-hue">
+            <option value="indigo">Indigo · 짙은 푸름</option>
+            <option value="ivory">Ivory · 미백</option>
+            <option value="onyx">Onyx · 흑요</option>
+            <option value="rose">Rose · 장미</option>
+            <option value="ochre">Ochre · 황토</option>
+            <option value="jade">Jade · 옥색</option>
+            <option value="copper">Copper · 구리</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Element · 당신의 원소</label>
+          <select id="solo-element">
+            <option value="earth">Earth · 흙</option>
+            <option value="water">Water · 물</option>
+            <option value="fire">Fire · 불</option>
+            <option value="air">Air · 바람</option>
+            <option value="metal">Metal · 금속</option>
+            <option value="wood">Wood · 나무</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn-ghost" href="#home" data-route="home">← Back</a>
+        <button class="btn btn-gold" onclick="soloSubmit()">Reveal · 감 정</button>
+      </div>
+    </div>
+
+    <div class="scene loading" id="solo-loading">
+      <div class="compass">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <g class="ring-outer">
+            <circle cx="80" cy="80" r="72" stroke="#c9a961" stroke-width="0.6" fill="none" opacity="0.5"/>
+            <g stroke="#c9a961" stroke-width="0.6" opacity="0.5">
+              <line x1="80" y1="8" x2="80" y2="14"/>
+              <line x1="80" y1="146" x2="80" y2="152"/>
+              <line x1="8" y1="80" x2="14" y2="80"/>
+              <line x1="146" y1="80" x2="152" y2="80"/>
+            </g>
+          </g>
+          <g class="ring-inner">
+            <circle cx="80" cy="80" r="56" stroke="#c98686" stroke-width="0.5" fill="none" opacity="0.5" stroke-dasharray="2 4"/>
+            <circle cx="80" cy="80" r="40" stroke="#ece4d3" stroke-width="0.3" fill="none" opacity="0.3"/>
+          </g>
+          <g class="needle">
+            <line x1="80" y1="80" x2="80" y2="20" stroke="#ece4d3" stroke-width="1"/>
+            <circle cx="80" cy="20" r="3" fill="#c98686"/>
+            <circle cx="80" cy="80" r="4" fill="#c9a961"/>
+          </g>
+        </svg>
+      </div>
+      <p>Tracing the constellation…</p>
+      <p class="step" id="solo-step">바람의 결을 읽고 있습니다</p>
+    </div>
+
+    <div class="scene result-card" id="solo-result">
+      <div class="header">
+        <div class="era-tag"><span class="dot"></span><span id="r-era">— · —</span></div>
+        <div class="name" id="r-name">—</div>
+        <div class="name-orig" id="r-name-orig">—</div>
+      </div>
+      <div class="rule">Your Prior Self</div>
+      <div class="verse" id="r-verse">—</div>
+      <div class="traits">
+        <div class="trait"><div class="label">Sign · 별자리</div><div class="value" id="r-sign">—</div></div>
+        <div class="trait"><div class="label">Energy · 기운</div><div class="value" id="r-energy">—</div></div>
+        <div class="trait"><div class="label">Hue · 당신의 색</div><div class="value has-dot" id="r-color">—</div></div>
+        <div class="trait"><div class="label">Element · 당신의 원소</div><div class="value" id="r-element">—</div></div>
+      </div>
+      <h3 class="section">The Story · 이 야 기</h3>
+      <p class="body" id="r-story">—</p>
+      <h3 class="section">Echoes Now · 지 금 에 이 어 진 것</h3>
+      <div class="legacy"><div class="text" id="r-legacy">—</div></div>
+
+      <div class="twin-card" id="twin-card" style="display:none;">
+        <div class="twin-era" id="twin-era">—</div>
+        <div class="twin-name" id="twin-name">—</div>
+        <div class="twin-orig" id="twin-orig">—</div>
+        <div class="twin-line" id="twin-line">—</div>
+      </div>
+
+      <div class="result-cta">
+        <div class="cta-row">
+          <a class="btn btn-gold" href="#bond" data-route="bond">→ Bond Reading</a>
+          <a class="btn btn-rose" href="#map" data-route="map">→ Soul Map</a>
+        </div>
+        <div class="cta-row">
+          <button class="btn" onclick="exportSoloCard()">↓ Save as Image · 카드 저장</button>
+        </div>
+        <a class="btn-ghost" href="#solo" data-route="solo" onclick="soloReset()">↻ Restart</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOND ===== -->
+  <section class="page" id="page-bond">
+    <div class="scene active form" id="bond-form">
+      <div class="step-num">ii.</div>
+      <h2>Two stars, one thread</h2>
+      <p class="sub">인연의 실 · 두 사람의 별과 시공간을 비교해 인연의 결을 읽습니다</p>
+
+      <div class="bond-pair">
+        <div class="person-block">
+          <div class="person-label">First Soul</div>
+          <div class="person-sub">첫 번째 영혼</div>
+          <div class="picker-group" id="picker-A">
+            <span class="picker-label">또는 저장된:</span>
+          </div>
+          <div class="field">
+            <label>Name · 이름</label>
+            <input type="text" id="bondA-name" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label>Birth · 생년월일</label>
+            <input type="date" id="bondA-birth" />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>Hue · 색</label>
+              <select id="bondA-hue">
+                <option value="indigo">Indigo · 짙은 푸름</option>
+                <option value="ivory">Ivory · 미백</option>
+                <option value="onyx">Onyx · 흑요</option>
+                <option value="rose">Rose · 장미</option>
+                <option value="ochre">Ochre · 황토</option>
+                <option value="jade">Jade · 옥색</option>
+                <option value="copper">Copper · 구리</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Element · 원소</label>
+              <select id="bondA-element">
+                <option value="earth">Earth · 흙</option>
+                <option value="water">Water · 물</option>
+                <option value="fire">Fire · 불</option>
+                <option value="air">Air · 바람</option>
+                <option value="metal">Metal · 금속</option>
+                <option value="wood">Wood · 나무</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="person-block">
+          <div class="person-label">Second Soul</div>
+          <div class="person-sub">두 번째 영혼</div>
+          <div class="picker-group" id="picker-B">
+            <span class="picker-label">또는 저장된:</span>
+          </div>
+          <div class="field">
+            <label>Name · 이름</label>
+            <input type="text" id="bondB-name" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label>Birth · 생년월일</label>
+            <input type="date" id="bondB-birth" />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>Hue · 색</label>
+              <select id="bondB-hue">
+                <option value="indigo">Indigo · 짙은 푸름</option>
+                <option value="ivory">Ivory · 미백</option>
+                <option value="onyx">Onyx · 흑요</option>
+                <option value="rose">Rose · 장미</option>
+                <option value="ochre">Ochre · 황토</option>
+                <option value="jade">Jade · 옥색</option>
+                <option value="copper">Copper · 구리</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Element · 원소</label>
+              <select id="bondB-element">
+                <option value="earth">Earth · 흙</option>
+                <option value="water">Water · 물</option>
+                <option value="fire">Fire · 불</option>
+                <option value="air">Air · 바람</option>
+                <option value="metal">Metal · 금속</option>
+                <option value="wood">Wood · 나무</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1rem;">
+        <label>Bond · 두 사람의 관계</label>
+        <select id="bond-tag">
+          <option value="kin">Kin · 가족</option>
+          <option value="lover">Lover · 연인</option>
+          <option value="friend" selected>Friend · 친구</option>
+          <option value="colleague">Colleague · 동료</option>
+          <option value="mentor">Mentor · 스승·인도자</option>
+          <option value="other">Other · 기타</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <a class="btn-ghost" href="#home" data-route="home">← Back</a>
+        <button class="btn btn-gold" onclick="bondSubmit()">Weave the Thread · 실 잇 기</button>
+      </div>
+    </div>
+
+    <div class="scene loading" id="bond-loading">
+      <div class="compass">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <g class="ring-outer">
+            <circle cx="80" cy="80" r="72" stroke="#c9a961" stroke-width="0.6" fill="none" opacity="0.5"/>
+          </g>
+          <g class="ring-inner">
+            <circle cx="80" cy="80" r="56" stroke="#c98686" stroke-width="0.5" fill="none" opacity="0.5" stroke-dasharray="2 4"/>
+            <circle cx="80" cy="80" r="40" stroke="#ece4d3" stroke-width="0.3" fill="none" opacity="0.3"/>
+          </g>
+          <g class="needle">
+            <line x1="80" y1="80" x2="80" y2="20" stroke="#ece4d3" stroke-width="1"/>
+            <circle cx="80" cy="20" r="3" fill="#c98686"/>
+            <circle cx="80" cy="80" r="4" fill="#c9a961"/>
+          </g>
+        </svg>
+      </div>
+      <p>Weaving the thread between two stars…</p>
+      <p class="step" id="bond-step">두 별의 위치를 맞추는 중</p>
+    </div>
+
+    <div class="scene" id="bond-result">
+      <div class="bond-pair">
+        <div class="mini-card">
+          <div class="mini-name-input" id="bA-userName">—</div>
+          <div class="mini-era" id="bA-era">—</div>
+          <div class="mini-name" id="bA-name">—</div>
+          <div class="mini-sign" id="bA-sign">—</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-name-input" id="bB-userName">—</div>
+          <div class="mini-era" id="bB-era">—</div>
+          <div class="mini-name" id="bB-name">—</div>
+          <div class="mini-sign" id="bB-sign">—</div>
+        </div>
+      </div>
+
+      <div class="rule">Bond Strength · 인연의 결속도</div>
+
+      <div class="bond-meter">
+        <div class="score-row">
+          <div class="score-num"><span id="b-score">—</span><span class="of"> / 100</span></div>
+          <div class="score-label" id="b-tier">—</div>
+        </div>
+        <div class="meter-bar"><div class="fill" id="b-fill"></div></div>
+      </div>
+
+      <h3 class="section">The Stars · 별 의 호 환 성</h3>
+      <div class="bond-line">
+        <span class="small">Element · 원소</span>
+        <div class="quote" id="b-elem-quote">—</div>
+        <div id="b-elem-text" style="margin-top:0.4rem;">—</div>
+      </div>
+      <div class="bond-line">
+        <span class="small">Modality · 양태</span>
+        <div id="b-mod-text">—</div>
+      </div>
+
+      <h3 class="section">The Crossroads · 전 생 의 시 공 간</h3>
+      <div class="bond-line">
+        <span class="small">Time · 시대 거리</span>
+        <div id="b-time-text">—</div>
+      </div>
+      <div class="bond-line">
+        <span class="small">Place · 공간 거리</span>
+        <div id="b-space-text">—</div>
+      </div>
+      <div class="legacy" style="margin-top:1.2rem;">
+        <div class="text" id="b-narrative">—</div>
+      </div>
+
+      <div class="result-cta">
+        <div class="cta-row">
+          <a class="btn btn-gold solo" href="#map" data-route="map">→ Soul Map</a>
+        </div>
+        <div class="cta-row">
+          <button class="btn solo" onclick="exportBondCard()">↓ Save as Image · 카드 저장</button>
+        </div>
+        <a class="btn-ghost" href="#bond" data-route="bond" onclick="bondReset()">↻ Restart</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAP ===== -->
+  <section class="page map-page" id="page-map">
+    <div class="step-num" style="display:inline-block;color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;margin-bottom:0.4rem;">iii.</div>
+    <h2>Soul Map</h2>
+    <p class="sub">영혼의 지도 · 등록된 영혼들과 그들의 인연을 별무리로 봅니다</p>
+
+    <div class="map-stats">
+      <div class="stat"><span class="num" id="m-souls">0</span><span>Souls · 영혼</span></div>
+      <div class="stat"><span class="num" id="m-bonds">0</span><span>Bonds · 인연</span></div>
+      <div class="stat"><span class="num" id="m-eras">0</span><span>Eras · 시대</span></div>
+    </div>
+
+    <div class="map-controls">
+      <input class="map-search" id="map-search" type="text" placeholder="이름으로 별 찾기 · Search by name" oninput="onMapSearch(this.value)" />
+      <button class="filter-pill active" data-elem="all"   onclick="filterByElement('all')">All</button>
+      <button class="filter-pill"        data-elem="fire"  onclick="filterByElement('fire')">Fire · 불</button>
+      <button class="filter-pill"        data-elem="earth" onclick="filterByElement('earth')">Earth · 흙</button>
+      <button class="filter-pill"        data-elem="air"   onclick="filterByElement('air')">Air · 바람</button>
+      <button class="filter-pill"        data-elem="water" onclick="filterByElement('water')">Water · 물</button>
+    </div>
+
+    <div class="map-canvas" id="map-canvas">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" id="map-svg"></svg>
+      <div class="empty" id="map-empty">
+        <div class="big">The sky is empty.</div>
+        <div class="sm">아직 등록된 영혼이 없습니다.<br/>전생 리포트나 인연의 실로 첫 별을 띄워주세요.</div>
+      </div>
+    </div>
+
+    <p class="map-tip">노드를 누르면 해당 영혼과 연결된 인연이 강조됩니다 · 빈 공간을 누르면 해제</p>
+
+    <div class="bond-legend">
+      <span style="color:var(--mute);letter-spacing:0.3em;text-transform:uppercase;">Bonds:</span>
+      <span class="key"><span class="swatch" style="--c:#c9a961"></span>Kin · 가족</span>
+      <span class="key"><span class="swatch" style="--c:#c98686"></span>Lover · 연인</span>
+      <span class="key"><span class="swatch" style="--c:#6b9c95"></span>Friend · 친구</span>
+      <span class="key"><span class="swatch" style="--c:#d8be8a"></span>Colleague · 동료</span>
+      <span class="key"><span class="swatch" style="--c:#7d7589"></span>Mentor · 스승</span>
+      <span class="key"><span class="swatch" style="--c:#5d5763"></span>Other · 기타</span>
+    </div>
+
+    <div class="map-detail" id="map-detail">
+      <div class="name" id="d-name">—</div>
+      <div class="info" id="d-info">—</div>
+      <div class="connections" id="d-conn">—</div>
+    </div>
+
+    <div class="map-actions">
+      <button class="btn-ghost" onclick="exportMap()">Export · 내보내기</button>
+      <button class="btn-ghost" onclick="resetMap()" style="color:var(--rose);">Reset · 초기화</button>
+    </div>
+  </section>
+</main>
+
+<footer>· Anteritus · Prior Lives · Soul Map ·</footer>
+
+<div class="saving-overlay" id="saving-overlay"><div class="msg" id="saving-msg">먹이 종이에 번지는 중…</div></div>
+
+<script>
+/* ============================================================
+   ARCHETYPES (18 global) — with element + lat/lng + year
+============================================================ */
+const ARCHETYPES = [
+  { id: 'edo',    era: '1820 · EDO',            year: 1820,  city: 'Edo',          lat: 35.68,  lng: 139.65,
+    name: '우키요에 판각공',           orig: 'UKIYO-E HORISHI',
+    energy: '집중', element: 'wood',  elementKr: '나무', symbol: '벚꽃과 칼',
+    hue: '#d8a0a0', hueLabel: '벚 분홍',
+    verse: 'Wood remembers what hands repeat.',
+    verseKo: '반복된 손길만이 결을 만든다.',
+    story: '에도의 좁은 골목 작업장에서, 화공이 그린 그림을 한 칼 한 칼 나무판에 새기던 사람. 자신의 이름이 작품에 남지 않음을 알면서도 그 한 획의 정확함을 위해 평생을 바쳤다. 보이지 않는 자리에서 가장 정확하게 일하는 사람의 자존심을 알았던 사람.',
+    legacy: '드러나지 않아도 일의 완성도가 자기 자신과 직결된다고 느끼는 성향. 누가 알아주지 않아도 끝까지 정성을 다하는 손끝의 고집은, 에도의 작업장에서 새겨진 결의 기억입니다.'
+  },
+  { id: 'thebes', era: '1300 BCE · THEBES',     year: -1300, city: 'Thebes',       lat: 25.72,  lng: 32.61,
+    name: '테베의 서기관',             orig: 'SCRIBE OF THEBES',
+    energy: '기록', element: 'earth', elementKr: '흙',  symbol: '갈대 펜과 따오기',
+    hue: '#c9a961', hueLabel: '사막의 황금',
+    verse: 'What is written, the river forgets last.',
+    verseKo: '쓰여진 것을 강은 가장 늦게 잊는다.',
+    story: '나일의 범람을 헤아리고, 곡식의 양을 적고, 신전의 문서를 베껴 쓰던 사람. 파라오의 이름과 농부의 빚을 같은 갈대 펜으로 적었다. 권력의 한가운데에 있었으나 자신을 드러내지 않았고 다만 정확한 기록만을 남기려 했던 사람.',
+    legacy: '중요한 것을 적어두지 않으면 마음이 불편한 성향. 사실과 감정을 분리해 정리하는 능력, 보이지 않는 곳에서 흐름을 정돈하는 감각은 그 시절 파피루스 위에서 익힌 손의 기억입니다.'
+  },
+  { id: 'gallia', era: '120 CE · GALLIA',       year: 120,   city: 'Lugdunum',     lat: 45.76,  lng: 4.83,
+    name: '갈리아의 도로 측량사',       orig: 'ROMAN GROMATICUS',
+    energy: '직선', element: 'earth', elementKr: '흙',  symbol: '측량줄과 북극성',
+    hue: '#a8a8a8', hueLabel: '돌의 잿빛',
+    verse: 'A straight line is a promise to the future.',
+    verseKo: '곧은 길은 미래에게 하는 약속이다.',
+    story: '제국의 끝에서 끝까지 도로를 그어가던 사람. 산이 가로막으면 산을 깎고 강이 가로막으면 다리를 놓았다. 자신이 그은 한 줄이 백 년 뒤에도 사람과 물자를 옮길 것이라 믿었기에 한 치도 어긋남이 없도록 측량했다.',
+    legacy: '계획을 세우면 그 선을 따라 끝까지 가는 성향. 즉흥보다 구조를 신뢰하고, 일을 시작하기 전에 전체 그림을 먼저 보려는 습관은 그 시절 측량줄을 잡았던 손의 방식입니다.'
+  },
+  { id: 'maragha',era: '1270 · MARAGHA',        year: 1270,  city: 'Maragha',      lat: 37.39,  lng: 46.24,
+    name: '마라게 천문대의 천문관',     orig: 'ASTRONOMER OF MARAGHA',
+    energy: '관조', element: 'air',   elementKr: '바람', symbol: '아스트롤라베와 별',
+    hue: '#3a4d6b', hueLabel: '심야의 청',
+    verse: 'The sky is older than every empire.',
+    verseKo: '하늘은 모든 제국보다 오래되었다.',
+    story: '몽골의 칸이 세운 천문대에서 아랍과 페르시아와 중국의 별 지식을 한 책으로 묶던 사람. 자기 시대의 지배자가 누구든 별의 운행은 변하지 않음을 알았다. 정치의 소음에서 가장 멀리, 가장 높은 곳을 응시하던 사람.',
+    legacy: '눈앞의 다툼보다 더 큰 흐름을 보려는 성향. 시끄러운 자리에서 한 발 떨어져 있을 때 오히려 또렷해지는 정신은, 마라게 천문대의 새벽 공기를 기억하는 마음입니다.'
+  },
+  { id: 'firenze',era: '1480 · FIRENZE',        year: 1480,  city: 'Firenze',      lat: 43.77,  lng: 11.25,
+    name: '약방의 도제',                orig: 'APOTHECARY APPRENTICE',
+    energy: '호기심', element: 'wood', elementKr: '나무', symbol: '유리병과 약초',
+    hue: '#7a9c7e', hueLabel: '약초 녹',
+    verse: 'Curiosity is the root of every cure.',
+    verseKo: '호기심은 모든 치료의 뿌리.',
+    story: '메디치의 도시 한 모퉁이 약방에서 동방에서 들어온 향료와 알프스의 약초를 같은 선반에 정리하던 사람. 책을 읽고 직접 시험해보는 일을 한 호흡으로 했다. 모르는 것을 부끄러워하지 않았고 다만 모르는 채로 두는 것을 부끄러워했다.',
+    legacy: '낯선 분야에 부담 없이 손을 대는 성향. 이론과 실험을 분리하지 않고 직접 해봐야 직성이 풀리는 마음, 다양한 영역을 가로지르는 호기심은 그 시절 약방의 선반에서 시작되었습니다.'
+  },
+  { id: 'changan',era: '820 · CHANG-AN',        year: 820,   city: 'Chang-an',     lat: 34.27,  lng: 108.93,
+    name: '실크로드의 통역관',          orig: 'SILK ROAD INTERPRETER',
+    energy: '연결', element: 'air',   elementKr: '바람', symbol: '낙타와 경전',
+    hue: '#c47b3a', hueLabel: '향료의 진황',
+    verse: 'Tongues meet where caravans rest.',
+    verseKo: '혀는 카라반이 쉬는 곳에서 만난다.',
+    story: '소그드인과 페르시아인과 중국 상인 사이에서 다섯 개의 말을 오가며 거래를 매개하던 사람. 정확한 번역보다 마음의 결을 옮기는 일을 더 어려워했고 더 잘했다. 각기 다른 세계 사이의 좁은 다리 위에서 평생을 살았다.',
+    legacy: '서로 다른 사람 사이의 분위기 차이를 본능적으로 느끼는 감각. 통역하지 않아도 분위기를 매개할 수 있는 능력, 어떤 무리에 들어가도 며칠이면 그 결에 적응하는 유연함은 그때 익힌 것입니다.'
+  },
+  { id: 'island', era: '980 · ÍSLAND',          year: 980,   city: 'Ísland',       lat: 64.13,  lng: -21.94,
+    name: '사가를 외우는 자',           orig: 'SAGA-KEEPER',
+    energy: '기억', element: 'fire',  elementKr: '불',  symbol: '룬과 모닥불',
+    hue: '#6b7d8e', hueLabel: '북해의 회청',
+    verse: 'Stories live longer than the men who lived them.',
+    verseKo: '이야기는 그것을 살았던 사람보다 오래 산다.',
+    story: '긴 겨울밤 화로 곁에 모인 사람들 앞에서 조상들의 항해와 싸움과 사랑을 외워서 들려주던 사람. 글로 기록되기 전의 시대, 사람의 입과 기억이 곧 도서관이었다. 자신을 통해 사람들이 한 번 더 살아남는다고 믿었던 사람.',
+    legacy: '한번 들은 이야기를 오래 기억하는 능력. 사람들이 모인 자리에서 자기도 모르게 이야기를 풀어내게 되는 성향, 스토리에 약한 마음은 그 시절 화롯불 곁의 입에서 이어진 것입니다.'
+  },
+  { id: 'mali',   era: '1340 · MALI',           year: 1340,  city: 'Timbuktu',     lat: 16.77,  lng: -3.00,
+    name: '소금 카라반의 길잡이',       orig: 'SALT CARAVAN GUIDE',
+    energy: '방향감', element: 'earth', elementKr: '흙', symbol: '낙타와 별',
+    hue: '#d4b886', hueLabel: '사하라 모래',
+    verse: 'The desert is a book that only the patient read.',
+    verseKo: '사막은 인내한 자만이 읽는 책이다.',
+    story: '타가자의 소금을 팀북투까지 옮기는 길에서 모래의 결과 별의 위치만으로 방향을 잡던 사람. 같은 사막이라도 매번 다른 길이었고 그 차이를 읽어내는 것이 곧 생존이었다. 길이 보이지 않을 때 가장 차분해지던 사람.',
+    legacy: '예측할 수 없는 상황에서 오히려 머리가 맑아지는 기질. 정해진 길이 사라졌을 때 새로운 길을 찾아내는 능력은, 사하라의 별빛 아래에서 단련된 감각의 흔적입니다.'
+  },
+  { id: 'yam',    era: '1240 · YAM',            year: 1240,  city: 'Karakorum',    lat: 47.59,  lng: 102.84,
+    name: '역참의 전령',                orig: 'YAM RIDER',
+    energy: '속도', element: 'air',   elementKr: '바람', symbol: '말과 지령서',
+    hue: '#7d4a4a', hueLabel: '말발굽의 적갈',
+    verse: 'A message outruns the empire that sends it.',
+    verseKo: '전갈은 자신을 보낸 제국보다 빠르다.',
+    story: '카라코룸에서 다마스쿠스까지, 하루 250킬로미터를 갈아타며 달리던 사람. 자신이 가져가는 종이 한 장에 한 도시의 운명이 걸려 있음을 알았다. 잠과 안락을 포기하는 대신 누구보다 먼저 도착하는 일에서 자기 존재를 확인했다.',
+    legacy: '시작한 일은 가장 먼저 끝내고 싶어하는 성향. 마감과 속도에서 묘한 쾌감을 느끼고 정체된 상황을 견디지 못하는 마음은 그 시절 안장 위의 호흡이 남긴 리듬입니다.'
+  },
+  { id: 'ottoman',era: '1620 · CONSTANTINOPLE', year: 1620,  city: 'Constantinople', lat: 41.01, lng: 28.97,
+    name: '카흐베하네의 이야기꾼',       orig: 'OTTOMAN MEDDAH',
+    energy: '재담', element: 'fire',  elementKr: '불',  symbol: '커피잔과 등불',
+    hue: '#5a3a2a', hueLabel: '커피의 흑갈',
+    verse: 'A good tale steeps like coffee — slow, dark, and clear.',
+    verseKo: '좋은 이야기는 커피처럼 우러난다.',
+    story: '보스포루스 곁의 한 카페에서 매일 밤 다른 손님 앞에서 다른 이야기를 풀어내던 사람. 이야기의 끝을 미리 정해두지 않았고 그날의 분위기에 따라 결말이 달라졌다. 사람의 표정 하나에서 그가 무엇을 듣고 싶어하는지 읽어내던 사람.',
+    legacy: '사람들 앞에서 분위기를 만드는 것을 즐기는 성향. 즉흥에 강하고 분위기를 읽는 감각이 빠른 마음. 누군가의 표정 하나로 다음 말을 바꿀 줄 아는 유연함은 그 시절 카흐베하네의 등잔 아래에서 익힌 것입니다.'
+  },
+  { id: 'cusco',  era: '1450 · CUSCO',          year: 1450,  city: 'Cusco',        lat: -13.52, lng: -71.96,
+    name: '키푸 해독자',                orig: 'QUIPU READER',
+    energy: '패턴', element: 'wood',  elementKr: '나무', symbol: '매듭과 색실',
+    hue: '#a8463a', hueLabel: '잉카 적토',
+    verse: 'Knots remember what voices forget.',
+    verseKo: '매듭은 목소리가 잊은 것을 기억한다.',
+    story: '문자가 없던 제국에서 색깔과 매듭의 위치만으로 한 도시의 인구와 한 신전의 곡식과 한 가문의 계보를 읽어내던 사람. 정보를 만지고 매만져 이해했다. 보이지 않는 구조를 보이게 만드는 일이 그의 천직이었다.',
+    legacy: '복잡한 정보 속에서 패턴을 발견하는 능력. 데이터, 표, 구조 같은 것들이 직관적으로 이해되고, 무질서해 보이는 것에서 질서를 찾는 즐거움은 그 시절 매듭을 매만지던 손의 기억입니다.'
+  },
+  { id: 'paris',  era: '1895 · PARIS',          year: 1895,  city: 'Paris',        lat: 48.86,  lng: 2.35,
+    name: '카바레의 피아니스트',         orig: 'CABARET PIANIST',
+    energy: '리듬', element: 'fire',  elementKr: '불',  symbol: '건반과 가스등',
+    hue: '#a06492', hueLabel: '벨벳 자색',
+    verse: "The night listens through the player's hands.",
+    verseKo: '밤은 연주자의 손을 통해 듣는다.',
+    story: '몽마르트르 언덕 아래의 한 카바레에서 새벽까지 즉흥으로 연주하던 사람. 손님이 어떤 사연을 들고 들어왔는지 한 곡으로 바꾸어 들려주는 것이 일이었다. 슬픔도 흥겨움도 같은 손가락에서 나왔다.',
+    legacy: '주변 분위기에 음악적으로 반응하는 감각. 누군가 슬프면 그 결에 맞추고 누군가 흥겨우면 그 위에 올라타는 즉흥성은 그 시절 가스등 아래의 건반에서 익힌 호흡입니다.'
+  },
+  { id: 'cordoba',era: '970 · CÓRDOBA',         year: 970,   city: 'Córdoba',      lat: 37.88,  lng: -4.78,
+    name: '필사본 채식사',              orig: 'MANUSCRIPT ILLUMINATOR',
+    energy: '정성', element: 'metal', elementKr: '금속', symbol: '금박과 코발트',
+    hue: '#2a4d8e', hueLabel: '코발트 청',
+    verse: 'Gold lasts because it does not rush.',
+    verseKo: '금이 오래 가는 것은 서두르지 않기 때문이다.',
+    story: '도서관의 도시 코르도바에서 아랍어와 라틴어와 히브리어 사이를 오가는 책들의 가장자리에 금박과 코발트로 그림을 그리던 사람. 글의 의미를 직접 옮기지는 못했으나 글이 머무는 자리를 가장 아름답게 만들었다.',
+    legacy: '본질을 둘러싼 디테일을 정성스럽게 가꾸는 성향. 가장자리, 마감, 마무리가 곧 작품의 격을 결정한다고 느끼는 감각은 그 시절 작은 붓 끝에서 익힌 미감입니다.'
+  },
+  { id: 'magadha',era: '260 BCE · MAGADHA',     year: -260,  city: 'Pataliputra',  lat: 25.59,  lng: 85.13,
+    name: '아소카 칙령의 석공',          orig: 'EDICT STONECUTTER',
+    energy: '신념', element: 'earth', elementKr: '흙',  symbol: '바위와 사자',
+    hue: '#c9a961', hueLabel: '사암 황',
+    verse: 'What is carved in stone outlives the carver.',
+    verseKo: '돌에 새겨진 것은 새긴 자보다 오래 산다.',
+    story: '아소카 왕이 비폭력과 자비를 새긴 돌기둥과 바위 위에 끌과 망치로 그 글자들을 옮기던 사람. 자신이 새기는 한 글자가 천 년 뒤의 사람에게 읽힐 것임을 알았기에 한 획도 흐트러뜨리지 않았다. 신념이 손끝에 깃들었던 사람.',
+    legacy: '한번 정한 가치는 오래 지키는 성향. 변덕보다 일관성을, 화려함보다 단단함을 신뢰하는 마음의 결은 그 시절 망치를 잡았던 손의 무게입니다.'
+  },
+  { id: 'tikal',  era: '700 · TIKAL',           year: 700,   city: 'Tikal',        lat: 17.22,  lng: -89.62,
+    name: '별을 읽는 사제',              orig: 'MAYA STARGAZER',
+    energy: '직관', element: 'air',   elementKr: '바람', symbol: '재규어와 별',
+    hue: '#3a5a4a', hueLabel: '정글의 흑록',
+    verse: 'The calendar is a thread, not a wall.',
+    verseKo: '달력은 벽이 아니라 실이다.',
+    story: '정글 위로 솟은 피라미드의 꼭대기에서 별의 위치로 시간을 읽고 다음 농사의 절기를 예언하던 사람. 시간은 일직선이 아니라 여러 겹의 원이라 믿었고 그 원들이 만나는 자리에서 의미를 찾았다.',
+    legacy: '논리만으로 설명되지 않는 것을 자연스럽게 받아들이는 마음. 시간을 단선이 아니라 겹으로 느끼는 감각, 우연 속에서 의미를 발견하는 직관은 그 시절 정글 위 밤하늘의 기억입니다.'
+  },
+  { id: 'tahiti', era: '1300 · TAHITI',         year: 1300,  city: 'Tahiti',       lat: -17.65, lng: -149.43,
+    name: '별로 길을 찾는 항해사',       orig: 'POLYNESIAN WAYFINDER',
+    energy: '담대함', element: 'water', elementKr: '물', symbol: '카누와 별자리',
+    hue: '#1a4a6a', hueLabel: '심해의 청',
+    verse: 'The horizon is not the end — only the next shore.',
+    verseKo: '수평선은 끝이 아니라 다음 해안이다.',
+    story: '나침반 없이 별과 너울의 결과 새의 비행만으로 수천 킬로미터의 바다를 건너던 사람. 가족의 오랜 구전 지식이 자기 몸에 들어 있다고 믿었다. 두려움과 호기심이 한 호흡으로 작동했던 사람.',
+    legacy: '확신은 없지만 가야 한다고 느끼면 일단 출발하는 성향. 알지 못하는 것 앞에서 위축되기보다 그 너머가 궁금해지는 마음은 그 시절 카누 위에서 별을 읽던 사람의 것입니다.'
+  },
+  { id: 'england',era: '1860 · ENGLAND',        year: 1860,  city: 'Northumberland', lat: 55.30, lng: -1.55,
+    name: '북해의 등대지기',             orig: 'LIGHTHOUSE KEEPER',
+    energy: '고요', element: 'water', elementKr: '물',  symbol: '등불과 파도',
+    hue: '#d8d3c4', hueLabel: '안개의 미백',
+    verse: 'A small flame is enough, if it does not go out.',
+    verseKo: '꺼지지 않는다면, 작은 불꽃이면 족하다.',
+    story: '북해의 절벽 위, 한 사람과 한 등불만이 있는 자리에서 평생을 보낸 사람. 폭풍 속에서 누군가에게는 그 빛 하나가 생사를 갈랐다. 외로움을 견디는 법보다 외로움 속에서도 등불을 가꾸는 법을 배운 사람.',
+    legacy: '혼자 있는 시간을 무거워하지 않는 기질. 자기만의 루틴과 의식을 정성스럽게 가꾸는 습관, 보이지 않는 누군가에게 영향을 주고 있다고 믿는 감각은 그 시절 등대의 밤이 남긴 마음입니다.'
+  },
+  { id: 'byzant', era: '1100 · CONSTANTINOPLE', year: 1100,  city: 'Constantinople', lat: 41.01, lng: 28.97,
+    name: '비잔틴의 이콘 화가',          orig: 'BYZANTINE ICONOGRAPHER',
+    energy: '경건', element: 'metal', elementKr: '금속', symbol: '금박과 성상',
+    hue: '#b8923a', hueLabel: '비잔틴 금',
+    verse: 'You do not paint the holy — you let it through.',
+    verseKo: '성스러움은 그리는 것이 아니라 통과시키는 것.',
+    story: '수도원의 작은 방에서 자신을 비우고 같은 성상을 평생 반복해 그리던 사람. 자기의 개성보다 전통의 정확함을 더 귀하게 여겼고 자기가 그리는 것이 아니라 자기를 통해 그려진다고 믿었다.',
+    legacy: '자기 자신을 앞세우지 않는 일에서 오히려 깊이를 찾는 성향. 반복 속에서 미세한 차이를 발견하는 감각, 자기 손이 무언가의 통로가 된다고 느끼는 마음은 그 시절 수도원의 빛이 남긴 흔적입니다.'
+  }
+];
+
+/* ============================================================
+   ZODIAC + ASTROLOGY
+============================================================ */
+// elements: fire / earth / air / water  ·  modality: cardinal / fixed / mutable
+const SIGNS = [
+  { key:'capricorn',  kr:'염소자리',   en:'Capricorn',   element:'earth', modality:'cardinal', from:[12,22], to:[1,19]  },
+  { key:'aquarius',   kr:'물병자리',   en:'Aquarius',    element:'air',   modality:'fixed',    from:[1,20],  to:[2,18]  },
+  { key:'pisces',     kr:'물고기자리', en:'Pisces',      element:'water', modality:'mutable',  from:[2,19],  to:[3,20]  },
+  { key:'aries',      kr:'양자리',     en:'Aries',       element:'fire',  modality:'cardinal', from:[3,21],  to:[4,19]  },
+  { key:'taurus',     kr:'황소자리',   en:'Taurus',      element:'earth', modality:'fixed',    from:[4,20],  to:[5,20]  },
+  { key:'gemini',     kr:'쌍둥이자리', en:'Gemini',      element:'air',   modality:'mutable',  from:[5,21],  to:[6,20]  },
+  { key:'cancer',     kr:'게자리',     en:'Cancer',      element:'water', modality:'cardinal', from:[6,21],  to:[7,22]  },
+  { key:'leo',        kr:'사자자리',   en:'Leo',         element:'fire',  modality:'fixed',    from:[7,23],  to:[8,22]  },
+  { key:'virgo',      kr:'처녀자리',   en:'Virgo',       element:'earth', modality:'mutable',  from:[8,23],  to:[9,22]  },
+  { key:'libra',      kr:'천칭자리',   en:'Libra',       element:'air',   modality:'cardinal', from:[9,23],  to:[10,22] },
+  { key:'scorpio',    kr:'전갈자리',   en:'Scorpio',     element:'water', modality:'fixed',    from:[10,23], to:[11,21] },
+  { key:'sagittarius',kr:'사수자리',   en:'Sagittarius', element:'fire',  modality:'mutable',  from:[11,22], to:[12,21] }
+];
+
+function signFromBirth(yyyy_mm_dd) {
+  if (!yyyy_mm_dd) return SIGNS[0];
+  const [, m, d] = yyyy_mm_dd.split('-').map(Number);
+  for (const s of SIGNS) {
+    const [fm, fd] = s.from, [tm, td] = s.to;
+    if (fm === tm) {
+      if (m === fm && d >= fd && d <= td) return s;
+    } else {
+      if ((m === fm && d >= fd) || (m === tm && d <= td)) return s;
+    }
+  }
+  return SIGNS[0];
+}
+
+// Element compatibility: returns { score 0-100, label, narrative }
+const ELEMENT_PAIR_TABLE = {
+  'fire-fire':   { score: 78, label: '불 × 불',   narrative: '같은 불꽃, 같은 속도. 서로를 격렬하게 알아보지만 함께 휴식할 시간을 잊지 않아야 합니다.' },
+  'fire-air':    { score: 92, label: '불 × 바람', narrative: '바람이 불을 키우고 불은 바람에 빛을 더합니다. 가장 활발히 서로를 키우는 시너지.' },
+  'fire-water':  { score: 58, label: '불 × 물',   narrative: '쉽게 닿지 않으나, 한번 닿으면 서로의 형태를 영원히 바꾸는 관계.' },
+  'fire-earth':  { score: 72, label: '불 × 흙',   narrative: '흙이 불을 품으면 그릇이 됩니다. 천천히 단단해지는 관계.' },
+  'air-air':     { score: 80, label: '바람 × 바람', narrative: '같은 결로 흘러가지만, 한 자리에 정박하지는 않습니다.' },
+  'air-water':   { score: 75, label: '바람 × 물', narrative: '바람이 수면을 흔들고, 물은 바람의 방향을 보여줍니다. 결을 따라 흐르는 노래.' },
+  'air-earth':   { score: 70, label: '바람 × 흙', narrative: '바람이 씨앗을 옮기고 흙이 받아 키웁니다. 서로 다른 속도가 보완이 되는 관계.' },
+  'water-water': { score: 84, label: '물 × 물',   narrative: '서로의 침묵까지 이해합니다. 깊되, 흘러야 합니다.' },
+  'water-earth': { score: 90, label: '물 × 흙',   narrative: '물이 흙을 적시면 흙이 생명을 키웁니다. 가장 보살피는 시너지.' },
+  'earth-earth': { score: 82, label: '흙 × 흙',   narrative: '두 개의 산. 흔들리지 않는 안정감, 다만 서로 다른 풍경을 봅니다.' }
+};
+function elementPair(a, b) {
+  const k1 = `${a}-${b}`, k2 = `${b}-${a}`;
+  return ELEMENT_PAIR_TABLE[k1] || ELEMENT_PAIR_TABLE[k2];
+}
+
+const MODALITY_PAIR = {
+  'cardinal-cardinal': '시작하는 두 사람. 추진력은 강하지만 주도권을 두고 부딪힐 수 있습니다.',
+  'cardinal-fixed':    '출발하는 자와 지키는 자. 누가 시작하고 누가 단단히 머무는지가 분명합니다.',
+  'cardinal-mutable':  '길을 여는 자와 흐르는 자. 흐름이 좋고 변화에 강합니다.',
+  'fixed-fixed':       '두 개의 기둥. 단단하지만, 서로 양보하는 법을 배워야 합니다.',
+  'fixed-mutable':     '깊이와 유연함의 만남. 서로 부족한 곳을 메워주는 보완 관계.',
+  'mutable-mutable':   '함께 변하는 두 사람. 자유롭지만 한 자리에 머물기는 어렵습니다.'
+};
+function modalityPair(a, b) {
+  return MODALITY_PAIR[`${a}-${b}`] || MODALITY_PAIR[`${b}-${a}`];
+}
+
+/* ============================================================
+   ARCHETYPE PICKING (biased by sign element + user element)
+============================================================ */
+function hashStr(s) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h;
+}
+
+const ELEMENT_AFFINITY = {
+  fire: ['fire', 'air', 'wood'],
+  air: ['air', 'fire', 'metal'],
+  water: ['water', 'metal', 'earth'],
+  earth: ['earth', 'water', 'wood'],
+  metal: ['metal', 'air', 'water'],
+  wood: ['wood', 'earth', 'fire']
+};
+
+// User-input lookup tables — keep form and result perfectly in sync
+const HUE_LABELS = {
+  indigo: 'Indigo · 짙은 푸름',
+  ivory:  'Ivory · 미백',
+  onyx:   'Onyx · 흑요',
+  rose:   'Rose · 장미',
+  ochre:  'Ochre · 황토',
+  jade:   'Jade · 옥색',
+  copper: 'Copper · 구리'
+};
+const HUE_HEX = {
+  indigo: '#3a4d6b',
+  ivory:  '#ece4d3',
+  onyx:   '#1a1614',
+  rose:   '#c98686',
+  ochre:  '#c9a961',
+  jade:   '#6b8e7f',
+  copper: '#b87a4a'
+};
+const ELEMENT_LABELS = {
+  earth: 'Earth · 흙',
+  water: 'Water · 물',
+  fire:  'Fire · 불',
+  air:   'Air · 바람',
+  metal: 'Metal · 금속',
+  wood:  'Wood · 나무'
+};
+
+// Map each archetype's hex hue to the closest user-pickable hue family
+function parseHex(h) {
+  const m = h.replace('#', '');
+  return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)];
+}
+function hueFamilyOf(hex) {
+  const [r, g, b] = parseHex(hex);
+  let best = 'ochre', bestD = Infinity;
+  for (const k in HUE_HEX) {
+    const [r2, g2, b2] = parseHex(HUE_HEX[k]);
+    const d = (r - r2) ** 2 + (g - g2) ** 2 + (b - b2) ** 2;
+    if (d < bestD) { bestD = d; best = k; }
+  }
+  return best;
+}
+const ARCHETYPE_HUE_FAMILY = {};
+ARCHETYPES.forEach(a => { ARCHETYPE_HUE_FAMILY[a.id] = hueFamilyOf(a.hue); });
+
+// Per-archetype noise that's independent of seed bit-shift correlations
+function noiseFor(seed, i) {
+  let h = (seed ^ Math.imul(i + 1, 2654435761)) >>> 0;
+  h = Math.imul(h ^ (h >>> 16), 0x85ebca6b) >>> 0;
+  h = Math.imul(h ^ (h >>> 13), 0xc2b2ae35) >>> 0;
+  h = (h ^ (h >>> 16)) >>> 0;
+  return (h % 10000) / 10000;
+}
+
+function pickArchetype({ name, birth, hue, element }) {
+  const sign = signFromBirth(birth);
+  const seed = hashStr(name + '|' + birth + '|' + hue + '|' + element + '|' + sign.key);
+
+  const userAff = ELEMENT_AFFINITY[element] || [];
+  const signAff = ELEMENT_AFFINITY[sign.element] || [];
+
+  let bestIdx = 0, bestScore = -Infinity;
+  for (let i = 0; i < ARCHETYPES.length; i++) {
+    const a = ARCHETYPES[i];
+    let bonus = 0;
+    // element axis — dominant, so picking Earth always lands you in earth-aligned archetypes
+    if (a.element === element)      bonus += 2.0;
+    if (a.element === sign.element) bonus += 1.5;
+    if (userAff.includes(a.element)) bonus += 0.3;
+    if (signAff.includes(a.element)) bonus += 0.25;
+    // hue axis — narrows the bucket inside an element family
+    if (ARCHETYPE_HUE_FAMILY[a.id] === hue) bonus += 0.6;
+    // noise — fully separates name+birth combinations within the same bucket
+    const noise = noiseFor(seed, i);
+    const score = bonus + noise * 0.5;
+    if (score > bestScore) { bestScore = score; bestIdx = i; }
+  }
+  return { archetype: ARCHETYPES[bestIdx], sign };
+}
+
+/* ============================================================
+   GEO HELPERS
+============================================================ */
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+/* ============================================================
+   STORAGE
+============================================================ */
+const STORE_KEY = 'anteritus.v1';
+
+function loadStore() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return { souls: [], bonds: [] };
+    return JSON.parse(raw);
+  } catch { return { souls: [], bonds: [] }; }
+}
+function saveStore(data) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch {}
+}
+
+function addSoul(soul) {
+  const store = loadStore();
+  // dedupe by name+birth
+  const existing = store.souls.find(s => s.name === soul.name && s.birth === soul.birth);
+  if (existing) {
+    Object.assign(existing, soul);
+  } else {
+    store.souls.push(soul);
+  }
+  saveStore(store);
+  return soul;
+}
+
+function findSoul(name, birth) {
+  const s = loadStore();
+  return s.souls.find(x => x.name === name && x.birth === birth);
+}
+
+function addBond(bond) {
+  const store = loadStore();
+  // dedupe by sorted pair
+  const key = [bond.aId, bond.bId].sort().join('|');
+  const idx = store.bonds.findIndex(b => [b.aId, b.bId].sort().join('|') === key);
+  if (idx >= 0) store.bonds[idx] = bond;
+  else store.bonds.push(bond);
+  saveStore(store);
+}
+
+function soulId(name, birth) { return name + '@' + birth; }
+
+/* ============================================================
+   ROUTING
+============================================================ */
+function route() {
+  const hash = location.hash.replace('#', '') || 'home';
+  const valid = ['home', 'solo', 'bond', 'map'];
+  const target = valid.includes(hash) ? hash : 'home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + target).classList.add('active');
+  document.querySelectorAll('.nav .links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.route === target);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (target === 'home') renderDailyEcho();
+  if (target === 'bond') refreshBondPickers();
+  if (target === 'map') renderMap();
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[data-route]');
+  if (a) {
+    // hash navigation handles routing
+  }
+});
+
+/* ============================================================
+   SOLO FLOW
+============================================================ */
+const LOADING_STEPS = [
+  '바람의 결을 읽고 있습니다',
+  '별의 위치를 맞추는 중',
+  '오래된 이름들을 호명합니다',
+  '시대의 좌표를 짚는 중',
+  '곧 그 사람이 옵니다'
+];
+
+function showScene(pageId, sceneId) {
+  document.querySelectorAll(`#${pageId} .scene`).forEach(s => s.classList.remove('active'));
+  document.getElementById(sceneId).classList.add('active');
+}
+
+function soloSubmit() {
+  const name = document.getElementById('solo-name').value.trim();
+  const birth = document.getElementById('solo-birth').value;
+  const hue = document.getElementById('solo-hue').value;
+  const element = document.getElementById('solo-element').value;
+  if (!name) { document.getElementById('solo-name').focus(); return; }
+  if (!birth) { document.getElementById('solo-birth').focus(); return; }
+
+  showScene('page-solo', 'solo-loading');
+  runLoading('solo-step', () => {
+    const input = { name, birth, hue, element };
+    const { archetype, sign } = pickArchetype(input);
+    const twin = pickTwinArchetype(input, archetype);
+    renderSoloResult(input, archetype, sign);
+    renderTwin(twin);
+    // auto-save soul
+    addSoul({
+      id: soulId(name, birth),
+      name, birth, hue, element,
+      archetypeId: archetype.id,
+      twinArchetypeId: twin ? twin.id : null,
+      signKey: sign.key,
+      createdAt: Date.now()
+    });
+    showScene('page-solo', 'solo-result');
+  });
+}
+
+function runLoading(stepElId, done) {
+  const stepEl = document.getElementById(stepElId);
+  let i = 0;
+  stepEl.textContent = LOADING_STEPS[0];
+  const interval = setInterval(() => {
+    i++;
+    if (i >= LOADING_STEPS.length) {
+      clearInterval(interval);
+      done();
+    } else {
+      stepEl.textContent = LOADING_STEPS[i];
+    }
+  }, 650);
+}
+
+function renderSoloResult(input, a, sign) {
+  document.getElementById('r-era').textContent = a.era;
+  document.getElementById('r-name').textContent = a.name;
+  document.getElementById('r-name-orig').textContent = a.orig;
+  document.getElementById('r-verse').innerHTML =
+    '"' + a.verse + '"<span class="ko">— ' + a.verseKo + '</span>';
+  document.getElementById('r-sign').textContent = sign.kr + ' · ' + sign.en;
+  document.getElementById('r-energy').textContent = a.energy;
+  document.getElementById('r-story').textContent = a.story;
+  document.getElementById('r-legacy').textContent = a.legacy;
+
+  // Show the user's picked Hue and Element to keep form ↔ result consistent
+  document.getElementById('r-element').textContent = ELEMENT_LABELS[input.element] || input.element;
+  const colorEl = document.getElementById('r-color');
+  colorEl.textContent = HUE_LABELS[input.hue] || input.hue;
+  colorEl.style.setProperty('--dot', HUE_HEX[input.hue] || a.hue);
+}
+
+function soloReset() {
+  showScene('page-solo', 'solo-form');
+}
+
+/* ============================================================
+   BOND FLOW
+============================================================ */
+function refreshBondPickers() {
+  const store = loadStore();
+  ['A', 'B'].forEach(slot => {
+    const wrap = document.getElementById('picker-' + slot);
+    // clear except first label
+    while (wrap.children.length > 1) wrap.removeChild(wrap.lastChild);
+    if (store.souls.length === 0) {
+      const empty = document.createElement('span');
+      empty.style.color = 'var(--mute)';
+      empty.style.fontSize = '0.78rem';
+      empty.style.fontStyle = 'italic';
+      empty.textContent = '아직 저장된 영혼 없음';
+      wrap.appendChild(empty);
+      return;
+    }
+    store.souls.slice().reverse().slice(0, 8).forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'saved-pick';
+      btn.type = 'button';
+      btn.textContent = s.name;
+      btn.onclick = () => fillBondPerson(slot, s);
+      wrap.appendChild(btn);
+    });
+  });
+}
+
+function fillBondPerson(slot, soul) {
+  document.getElementById(`bond${slot}-name`).value = soul.name;
+  document.getElementById(`bond${slot}-birth`).value = soul.birth;
+  document.getElementById(`bond${slot}-hue`).value = soul.hue;
+  document.getElementById(`bond${slot}-element`).value = soul.element;
+}
+
+function bondSubmit() {
+  const A = readPerson('bondA');
+  const B = readPerson('bondB');
+  if (!A || !B) return;
+  if (A.name === B.name && A.birth === B.birth) {
+    alert('두 사람이 같은 영혼입니다. 다른 한 사람의 정보를 입력해 주세요.');
+    return;
+  }
+  const tag = document.getElementById('bond-tag').value;
+  showScene('page-bond', 'bond-loading');
+  runLoading('bond-step', () => {
+    const pickA = pickArchetype(A);
+    const pickB = pickArchetype(B);
+    renderBondResult(A, pickA, B, pickB);
+    const sa = addSoul({
+      id: soulId(A.name, A.birth), name: A.name, birth: A.birth, hue: A.hue, element: A.element,
+      archetypeId: pickA.archetype.id, signKey: pickA.sign.key, createdAt: Date.now()
+    });
+    const sb = addSoul({
+      id: soulId(B.name, B.birth), name: B.name, birth: B.birth, hue: B.hue, element: B.element,
+      archetypeId: pickB.archetype.id, signKey: pickB.sign.key, createdAt: Date.now()
+    });
+    const bondData = computeBond(pickA, pickB);
+    addBond({
+      aId: sa.id, bId: sb.id,
+      score: bondData.score,
+      tier: bondData.tier,
+      narrative: bondData.narrative,
+      tag,
+      createdAt: Date.now()
+    });
+    showScene('page-bond', 'bond-result');
+  });
+}
+
+function readPerson(prefix) {
+  const name = document.getElementById(prefix + '-name').value.trim();
+  const birth = document.getElementById(prefix + '-birth').value;
+  const hue = document.getElementById(prefix + '-hue').value;
+  const element = document.getElementById(prefix + '-element').value;
+  if (!name) { document.getElementById(prefix + '-name').focus(); return null; }
+  if (!birth) { document.getElementById(prefix + '-birth').focus(); return null; }
+  return { name, birth, hue, element };
+}
+
+function computeBond(pickA, pickB) {
+  const a = pickA.archetype, b = pickB.archetype;
+  const sA = pickA.sign, sB = pickB.sign;
+
+  // sign element compatibility (using sign elements, not user-picked)
+  const ep = elementPair(sA.element, sB.element);
+
+  // modality pair narrative
+  const mp = modalityPair(sA.modality, sB.modality);
+
+  // temporal proximity (years)
+  const dy = Math.abs(a.year - b.year);
+  const tProx = Math.max(0, 1 - dy / 3000); // 0..1
+
+  // spatial proximity (km)
+  const dKm = haversineKm(a.lat, a.lng, b.lat, b.lng);
+  const sProx = Math.max(0, 1 - dKm / 18000); // 0..1
+
+  // final score: element 55%, time 25%, space 20%
+  const score = Math.round(ep.score * 0.55 + tProx * 100 * 0.25 + sProx * 100 * 0.20);
+  const tier = scoreTier(score);
+
+  // narratives
+  let timeText;
+  if (dy <= 100)       timeText = `같은 시대 — ${dy}년 사이. 한 하늘 아래 동시대를 살았습니다.`;
+  else if (dy <= 500)  timeText = `가까운 시대 — ${dy}년 차이. 같은 세계관을 공유한 두 사람.`;
+  else if (dy <= 1500) timeText = `다른 세기 — 약 ${dy}년의 거리. 서로의 시대를 교과서에서 만났을 사이.`;
+  else                 timeText = `먼 시대 — 약 ${dy}년의 거리. 그러나 같은 별이 두 시대 위를 함께 지나갔습니다.`;
+
+  let spaceText;
+  if (dKm <= 500)        spaceText = `같은 권역 — ${Math.round(dKm).toLocaleString()}km. 같은 시장에서 마주쳤을 가능성.`;
+  else if (dKm <= 3000)  spaceText = `같은 대륙 — ${Math.round(dKm).toLocaleString()}km. 같은 항로의 양 끝에 서 있던 사이.`;
+  else if (dKm <= 8000)  spaceText = `다른 대륙 — ${Math.round(dKm).toLocaleString()}km. 한 사람의 소문이 다른 한 사람에게 닿기까지 한 계절이 걸렸을 거리.`;
+  else                   spaceText = `지구 반대편 — ${Math.round(dKm).toLocaleString()}km. 서로의 존재조차 몰랐을 거리, 그러나 별 하나는 두 사람의 머리 위를 함께 지나갔습니다.`;
+
+  // crossroad narrative — pick one based on combined proximity
+  const combined = (tProx + sProx) / 2;
+  let narrative;
+  if (combined > 0.7) {
+    narrative = `매우 가까운 시공간. ${a.city}와 ${b.city} 사이의 한 길목에서 두 사람의 전생은 분명 한 번은 스쳤습니다. 익숙함이 이상하게 빠르다면, 그 이유입니다.`;
+  } else if (combined > 0.45) {
+    narrative = `한 시대의 가장자리에서 만났을 사이. 직접 마주치지는 못했더라도, 같은 카라반 길이나 같은 항구의 소문 속에 서로의 그림자가 들어 있었을 가능성.`;
+  } else if (combined > 0.2) {
+    narrative = `시대도 대륙도 다른 두 영혼. 그러나 ${ep.label}의 결이 시간을 가로질러 두 사람을 이번 생에서 다시 묶었습니다.`;
+  } else {
+    narrative = `시간과 공간의 정반대 끝에서 살았던 두 사람. 그렇기에 이번 생에서의 만남이 더 의미가 깊습니다 — 가장 먼 별끼리 가장 정확한 직선을 만듭니다.`;
+  }
+
+  return { score, tier, ep, mp, dy, dKm, narrative };
+}
+
+function scoreTier(s) {
+  if (s >= 85) return '깊은 인연 · Profound';
+  if (s >= 70) return '결이 맞는 사이 · Resonant';
+  if (s >= 55) return '서로를 키우는 사이 · Nurturing';
+  if (s >= 40) return '배움이 있는 사이 · Lessons';
+  return '교차하는 사이 · Crossing';
+}
+
+function renderBondResult(A, pickA, B, pickB) {
+  const aA = pickA.archetype, sA = pickA.sign;
+  const aB = pickB.archetype, sB = pickB.sign;
+
+  document.getElementById('bA-userName').textContent = A.name;
+  document.getElementById('bA-era').textContent = aA.era;
+  document.getElementById('bA-name').textContent = aA.name;
+  document.getElementById('bA-sign').textContent = sA.kr + ' · ' + sA.en + ' · ' + capitalize(sA.element);
+
+  document.getElementById('bB-userName').textContent = B.name;
+  document.getElementById('bB-era').textContent = aB.era;
+  document.getElementById('bB-name').textContent = aB.name;
+  document.getElementById('bB-sign').textContent = sB.kr + ' · ' + sB.en + ' · ' + capitalize(sB.element);
+
+  const bond = computeBond(pickA, pickB);
+  document.getElementById('b-score').textContent = bond.score;
+  document.getElementById('b-tier').textContent = bond.tier;
+  // animate fill
+  setTimeout(() => {
+    document.getElementById('b-fill').style.transform = `scaleX(${bond.score / 100})`;
+  }, 50);
+
+  document.getElementById('b-elem-quote').textContent = bond.ep.label;
+  document.getElementById('b-elem-text').textContent = bond.ep.narrative;
+  document.getElementById('b-mod-text').textContent = bond.mp;
+  document.getElementById('b-time-text').textContent = `${bond.dy.toLocaleString()}년 — ` + (function(){
+    if (bond.dy <= 100) return '같은 시대';
+    if (bond.dy <= 500) return '가까운 시대';
+    if (bond.dy <= 1500) return '다른 세기';
+    return '먼 시대';
+  })();
+  document.getElementById('b-space-text').textContent = `${Math.round(bond.dKm).toLocaleString()}km — ` + (function(){
+    if (bond.dKm <= 500) return '같은 권역';
+    if (bond.dKm <= 3000) return '같은 대륙';
+    if (bond.dKm <= 8000) return '다른 대륙';
+    return '지구 반대편';
+  })();
+  document.getElementById('b-narrative').textContent = bond.narrative;
+}
+
+function bondReset() {
+  showScene('page-bond', 'bond-form');
+  document.getElementById('b-fill').style.transform = 'scaleX(0)';
+}
+
+function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
+
+/* ============================================================
+   MAP RENDERING — Star cluster
+============================================================ */
+let selectedNodeId = null;
+
+function renderMap() {
+  const store = loadStore();
+  const svg = document.getElementById('map-svg');
+  const empty = document.getElementById('map-empty');
+  const detail = document.getElementById('map-detail');
+
+  document.getElementById('m-souls').textContent = store.souls.length;
+  document.getElementById('m-bonds').textContent = store.bonds.length;
+  const eras = new Set(store.souls.map(s => archetypeOf(s)?.era));
+  eras.delete(undefined);
+  document.getElementById('m-eras').textContent = eras.size;
+
+  if (store.souls.length === 0) {
+    empty.style.display = 'flex';
+    svg.innerHTML = '';
+    detail.classList.remove('visible');
+    return;
+  }
+  empty.style.display = 'none';
+
+  // compute layout: place each soul at (angle, radius)
+  // angle from sign element + name hash; radius from era recency
+  const W = 600, H = 600;
+  const cx = W / 2, cy = H / 2;
+  const minR = 90, maxR = 250;
+
+  const nodes = store.souls.map(s => {
+    const a = archetypeOf(s) || ARCHETYPES[0];
+    const sign = SIGNS.find(x => x.key === s.signKey) || SIGNS[0];
+    const elementAngle = elementToAngle(sign.element);
+    const jitter = (hashStr(s.id) % 4000 / 4000 - 0.5) * 50; // ±25 deg
+    const angle = ((elementAngle + jitter) % 360) * Math.PI / 180;
+
+    // radius from year — older = inner, recent = outer
+    const minY = -1500, maxY = 1900;
+    const yNorm = (a.year - minY) / (maxY - minY);
+    const radius = minR + (maxR - minR) * yNorm + ((hashStr(s.id) >>> 8) % 30 - 15);
+
+    const x = cx + radius * Math.cos(angle);
+    const y = cy + radius * Math.sin(angle);
+    return { soul: s, archetype: a, sign, x, y };
+  });
+
+  // map id -> node
+  const byId = Object.fromEntries(nodes.map(n => [n.soul.id, n]));
+
+  // edges
+  const edges = store.bonds.map(b => {
+    const A = byId[b.aId], B = byId[b.bId];
+    if (!A || !B) return null;
+    return { A, B, bond: b };
+  }).filter(Boolean);
+
+  // build svg
+  let html = '';
+
+  // background concentric rings
+  for (let r = 60; r < 280; r += 60) {
+    html += `<circle cx="${cx}" cy="${cy}" r="${r}" stroke="rgba(236,228,211,0.05)" stroke-width="0.5" fill="none"/>`;
+  }
+  // axes (element directions)
+  const axes = [
+    { angle: 0,    label: 'FIRE 불' },
+    { angle: 90,   label: 'EARTH 흙' },
+    { angle: 180,  label: 'AIR 바람' },
+    { angle: 270,  label: 'WATER 물' }
+  ];
+  axes.forEach(ax => {
+    const rad = ax.angle * Math.PI / 180;
+    const lx = cx + 285 * Math.cos(rad);
+    const ly = cy + 285 * Math.sin(rad);
+    html += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle"
+      style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.3em;fill:rgba(125,117,137,0.55);">${ax.label}</text>`;
+  });
+
+  // edges — colored by bond.tag if present, else fall back to score-based color
+  edges.forEach(e => {
+    const tag = e.bond.tag || 'other';
+    const baseColor = BOND_TAG_COLOR[tag] || BOND_TAG_COLOR.other;
+    const opacity = 0.2 + 0.65 * (e.bond.score / 100);
+    const sw = 0.6 + 1.6 * (e.bond.score / 100);
+    const midX = (e.A.x + e.B.x) / 2 + ((hashStr(e.A.soul.id + e.B.soul.id) % 60) - 30);
+    const midY = (e.A.y + e.B.y) / 2 + ((hashStr(e.B.soul.id + e.A.soul.id) % 60) - 30);
+    html += `<path class="edge" data-a="${e.A.soul.id}" data-b="${e.B.soul.id}" data-tag="${tag}"
+      d="M ${e.A.x} ${e.A.y} Q ${midX} ${midY} ${e.B.x} ${e.B.y}"
+      stroke="${baseColor}" stroke-opacity="${opacity}" stroke-width="${sw}" fill="none"/>`;
+  });
+
+  // nodes
+  nodes.forEach(n => {
+    const fill = n.archetype.hue;
+    const isNew = !prevSoulIds.has(n.soul.id);
+    const cls = 'node-group' + (isNew ? ' new' : '');
+    html += `<g class="${cls}" data-id="${n.soul.id}" data-elem="${n.sign.element}" data-name="${escapeXml(n.soul.name.toLowerCase())}" onclick="selectNode('${n.soul.id}')">
+      <circle class="node node-glow" cx="${n.x}" cy="${n.y}" r="9" fill="${fill}" opacity="0.25"/>
+      <circle class="node" cx="${n.x}" cy="${n.y}" r="4" fill="${fill}" stroke="#ece4d3" stroke-width="0.5"/>
+      <text class="label" x="${n.x}" y="${n.y + 16}" text-anchor="middle">${escapeXml(n.soul.name)}</text>
+    </g>`;
+  });
+
+  svg.innerHTML = html;
+  // remember which souls are now on the map so next render can detect new ones
+  prevSoulIds = new Set(store.souls.map(s => s.id));
+  // re-apply current search/filter
+  applyMapVisual();
+
+  // re-apply selection if any
+  if (selectedNodeId && byId[selectedNodeId]) {
+    applyNodeSelection(selectedNodeId, byId, edges);
+  } else {
+    selectedNodeId = null;
+    detail.classList.remove('visible');
+  }
+
+  // background click to deselect
+  svg.onclick = (e) => {
+    if (e.target === svg || e.target.tagName === 'circle' && e.target.getAttribute('fill') === 'none') {
+      selectedNodeId = null;
+      document.querySelectorAll('#map-svg .node-group').forEach(g => g.classList.remove('dim'));
+      document.querySelectorAll('#map-svg .edge').forEach(p => { p.classList.remove('dim'); p.classList.remove('highlight'); });
+      detail.classList.remove('visible');
+    }
+  };
+}
+
+function elementToAngle(element) {
+  // place fire on the right (0°), earth bottom (90°), air left (180°), water top (270°)
+  switch (element) {
+    case 'fire':  return 0;
+    case 'earth': return 90;
+    case 'air':   return 180;
+    case 'water': return 270;
+    default:      return 45;
+  }
+}
+
+function archetypeOf(soul) {
+  return ARCHETYPES.find(a => a.id === soul.archetypeId);
+}
+
+function selectNode(id) {
+  selectedNodeId = id;
+  const store = loadStore();
+  const nodes = {};
+  document.querySelectorAll('#map-svg .node-group').forEach(g => {
+    nodes[g.dataset.id] = g;
+  });
+  applyNodeSelection(id, null, null);
+
+  // detail panel
+  const soul = store.souls.find(s => s.id === id);
+  if (!soul) return;
+  const a = archetypeOf(soul);
+  const sign = SIGNS.find(x => x.key === soul.signKey);
+  const conn = store.bonds.filter(b => b.aId === id || b.bId === id);
+  const connDescr = conn.map(b => {
+    const other = store.souls.find(s => s.id === (b.aId === id ? b.bId : b.aId));
+    if (!other) return '';
+    const tagLabel = BOND_TAG_LABEL[b.tag || 'other'] || '기타';
+    return `${other.name}<span style="color:var(--mute);"> (${tagLabel} · ${b.score})</span>`;
+  }).filter(Boolean);
+
+  document.getElementById('d-name').textContent = soul.name;
+  document.getElementById('d-info').innerHTML =
+    `${a.era} · ${a.name}<br/>${sign ? sign.kr + ' · ' + sign.en + ' · ' + capitalize(sign.element) : ''}`;
+  document.getElementById('d-conn').innerHTML = connDescr.length
+    ? `Bonds (${connDescr.length}) — <span class="conn">${connDescr.join(' · ')}</span>`
+    : 'Bonds — <span class="conn">아직 연결된 인연이 없습니다.</span>';
+  document.getElementById('map-detail').classList.add('visible');
+}
+
+function applyNodeSelection(id) {
+  const groups = document.querySelectorAll('#map-svg .node-group');
+  const edges = document.querySelectorAll('#map-svg .edge');
+
+  // dim everything first
+  groups.forEach(g => g.classList.add('dim'));
+  edges.forEach(p => { p.classList.add('dim'); p.classList.remove('highlight'); });
+
+  // un-dim selected and connected
+  const connectedIds = new Set([id]);
+  edges.forEach(p => {
+    if (p.dataset.a === id || p.dataset.b === id) {
+      p.classList.remove('dim');
+      p.classList.add('highlight');
+      connectedIds.add(p.dataset.a);
+      connectedIds.add(p.dataset.b);
+    }
+  });
+  groups.forEach(g => {
+    if (connectedIds.has(g.dataset.id)) g.classList.remove('dim');
+  });
+}
+
+function escapeXml(s) {
+  return String(s).replace(/[<>&"']/g, c => ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;' })[c]);
+}
+
+function exportMap() {
+  const store = loadStore();
+  const blob = new Blob([JSON.stringify(store, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'anteritus-souls.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function resetMap() {
+  if (!confirm('정말 모든 영혼과 인연을 지우시겠어요? 되돌릴 수 없습니다.')) return;
+  localStorage.removeItem(STORE_KEY);
+  selectedNodeId = null;
+  renderMap();
+}
+
+/* ============================================================
+   TWIN LIVES — pick a second archetype far in time from primary
+============================================================ */
+function pickTwinArchetype(input, primary) {
+  const sign = signFromBirth(input.birth);
+  const seed = hashStr(input.name + '|' + input.birth + '|' + input.hue + '|' + input.element + '|twin');
+  const userAff = ELEMENT_AFFINITY[input.element] || [];
+  const signAff = ELEMENT_AFFINITY[sign.element] || [];
+
+  let bestIdx = -1, bestScore = -Infinity;
+  for (let i = 0; i < ARCHETYPES.length; i++) {
+    const a = ARCHETYPES[i];
+    if (a.id === primary.id) continue;
+    // require at least 600 years between primary and twin
+    if (Math.abs(a.year - primary.year) < 600) continue;
+
+    let bonus = 0;
+    if (a.element === input.element)   bonus += 1.4;
+    if (a.element === sign.element)    bonus += 1.0;
+    if (userAff.includes(a.element))   bonus += 0.3;
+    if (signAff.includes(a.element))   bonus += 0.25;
+    if (ARCHETYPE_HUE_FAMILY[a.id] === input.hue) bonus += 0.4;
+    const noise = noiseFor(seed, i);
+    const score = bonus + noise * 0.6;
+    if (score > bestScore) { bestScore = score; bestIdx = i; }
+  }
+  return bestIdx >= 0 ? ARCHETYPES[bestIdx] : null;
+}
+
+function renderTwin(twin) {
+  const card = document.getElementById('twin-card');
+  if (!twin) { card.style.display = 'none'; return; }
+  document.getElementById('twin-era').textContent = twin.era;
+  document.getElementById('twin-name').textContent = twin.name;
+  document.getElementById('twin-orig').textContent = twin.orig;
+  document.getElementById('twin-line').textContent =
+    '"' + twin.verseKo + '" — ' + twin.story.split('.')[0] + '.';
+  card.style.display = 'block';
+}
+
+/* ============================================================
+   DAILY ECHO — today's whisper on the home page
+============================================================ */
+function dayKey(d) {
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+// Korean subject particle: 이 (after consonant 받침) / 가 (after vowel)
+function josaIga(word) {
+  if (!word) return '이';
+  const last = word[word.length - 1];
+  const code = last.charCodeAt(0);
+  if (code >= 0xAC00 && code <= 0xD7A3) {
+    const jongseong = (code - 0xAC00) % 28;
+    return jongseong === 0 ? '가' : '이';
+  }
+  return '이';
+}
+
+// 으로 / 로 (after ㄹ 받침 also takes 로)
+function josaRo(word) {
+  if (!word) return '으로';
+  const last = word[word.length - 1];
+  const code = last.charCodeAt(0);
+  if (code >= 0xAC00 && code <= 0xD7A3) {
+    const jongseong = (code - 0xAC00) % 28;
+    if (jongseong === 0 || jongseong === 8) return '로';
+    return '으로';
+  }
+  return '으로';
+}
+
+function renderDailyEcho() {
+  const wrap = document.getElementById('daily-echo');
+  if (!wrap) return;
+  const store = loadStore();
+  const today = new Date();
+  const dateSeed = hashStr('echo|' + dayKey(today));
+
+  let archetype, sourceLabel;
+  if (store.souls.length > 0) {
+    // The user's own past life speaks today — alternate between primary and twin if twin exists
+    const recent = store.souls[store.souls.length - 1];
+    const primary = ARCHETYPES.find(a => a.id === recent.archetypeId) || ARCHETYPES[0];
+    const twin = recent.twinArchetypeId ? ARCHETYPES.find(a => a.id === recent.twinArchetypeId) : null;
+    const candidates = twin ? [primary, twin] : [primary];
+    archetype = candidates[dateSeed % candidates.length];
+    sourceLabel = `<span class="who">${recent.name}</span>의 전생, ${archetype.name}${josaIga(archetype.name)} 오늘 속삭입니다`;
+  } else {
+    archetype = ARCHETYPES[dateSeed % ARCHETYPES.length];
+    const eraYear = archetype.era.split('·')[0].trim();
+    sourceLabel =
+      `이름 없는 당신을 위해, ${eraYear} · ${archetype.name}${josaIga(archetype.name)} 한 줄을 보냈습니다.` +
+      `<br/><a href="#solo" data-route="solo" class="echo-cta">전생 리포트를 받으면 매일 당신의 별이 속삭입니다 →</a>`;
+  }
+  document.getElementById('daily-echo-date').textContent =
+    today.getFullYear() + ' · ' + String(today.getMonth()+1).padStart(2,'0') + ' · ' + String(today.getDate()).padStart(2,'0');
+  document.getElementById('daily-echo-line').innerHTML =
+    '"' + archetype.verse + '"<span class="ko">— ' + archetype.verseKo + '</span>';
+  document.getElementById('daily-echo-source').innerHTML = sourceLabel;
+  wrap.style.display = 'block';
+}
+
+/* ============================================================
+   BOND TAG → MAP EDGE COLOR
+============================================================ */
+const BOND_TAG_COLOR = {
+  kin:       '#c9a961',
+  lover:     '#c98686',
+  friend:    '#6b9c95',
+  colleague: '#d8be8a',
+  mentor:    '#7d7589',
+  other:     '#5d5763'
+};
+const BOND_TAG_LABEL = {
+  kin: '가족', lover: '연인', friend: '친구', colleague: '동료', mentor: '스승', other: '기타'
+};
+
+/* ============================================================
+   MAP SEARCH + ELEMENT FILTER
+============================================================ */
+let mapSearchQuery = '';
+let mapElementFilter = 'all';
+let prevSoulIds = new Set();
+
+function onMapSearch(q) {
+  mapSearchQuery = (q || '').trim().toLowerCase();
+  applyMapVisual();
+}
+function filterByElement(elem) {
+  mapElementFilter = elem;
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.elem === elem);
+  });
+  applyMapVisual();
+}
+function applyMapVisual() {
+  const groups = document.querySelectorAll('#map-svg .node-group');
+  const edges = document.querySelectorAll('#map-svg .edge');
+  const visibleIds = new Set();
+  groups.forEach(g => {
+    const id = g.dataset.id;
+    const elem = g.dataset.elem;
+    const name = (g.dataset.name || '').toLowerCase();
+    const matchSearch = !mapSearchQuery || name.includes(mapSearchQuery);
+    const matchFilter = mapElementFilter === 'all' || elem === mapElementFilter;
+    const visible = matchSearch && matchFilter;
+    g.classList.toggle('dim', !visible);
+    if (visible) visibleIds.add(id);
+  });
+  edges.forEach(p => {
+    const a = p.dataset.a, b = p.dataset.b;
+    const visible = visibleIds.has(a) && visibleIds.has(b);
+    p.classList.toggle('dim', !visible);
+  });
+}
+
+/* ============================================================
+   IMAGE EXPORT — Canvas-rendered share card (1080×1920)
+============================================================ */
+const CARD_W = 1080, CARD_H = 1920;
+
+function showSaving(msg) {
+  const overlay = document.getElementById('saving-overlay');
+  document.getElementById('saving-msg').textContent = msg || '먹이 종이에 번지는 중…';
+  overlay.classList.add('visible');
+}
+function hideSaving() {
+  document.getElementById('saving-overlay').classList.remove('visible');
+}
+
+async function ensureFonts() {
+  if (document.fonts && document.fonts.ready) {
+    try { await document.fonts.ready; } catch {}
+  }
+}
+
+function drawBackdrop(ctx) {
+  const grad = ctx.createLinearGradient(0, 0, 0, CARD_H);
+  grad.addColorStop(0, '#0a0c14');
+  grad.addColorStop(0.5, '#11131e');
+  grad.addColorStop(1, '#0a0c14');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, CARD_W, CARD_H);
+
+  // ambient glows
+  const glow = (cx, cy, r, color, alpha) => {
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    g.addColorStop(0, color + Math.round(alpha * 255).toString(16).padStart(2,'0'));
+    g.addColorStop(1, color + '00');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, CARD_W, CARD_H);
+  };
+  glow(540, 0,    900, '#c9a961', 0.18);
+  glow(960, 1700, 700, '#c98686', 0.13);
+  glow(120, 1100, 600, '#6b9c95', 0.10);
+
+  // stars (deterministic)
+  let s = 12345;
+  const rnd = () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 0xffffffff; };
+  for (let i = 0; i < 220; i++) {
+    const x = rnd() * CARD_W, y = rnd() * CARD_H;
+    const r = rnd() * 1.8 + 0.4;
+    const a = 0.3 + rnd() * 0.6;
+    ctx.fillStyle = i % 23 === 0 ? '#c98686' : (i % 17 === 0 ? '#d8be8a' : '#ece4d3');
+    ctx.globalAlpha = a;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
+function drawEmblem(ctx, cx, cy, scale) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(scale, scale);
+  ctx.strokeStyle = '#c9a961';
+  ctx.lineWidth = 1.4;
+  ctx.globalAlpha = 0.7;
+  ctx.beginPath(); ctx.arc(0, 0, 28, 0, Math.PI*2); ctx.stroke();
+  ctx.globalAlpha = 0.5;
+  ctx.beginPath(); ctx.arc(0, 0, 20, 0, Math.PI*2); ctx.stroke();
+  ctx.globalAlpha = 0.4;
+  ctx.beginPath(); ctx.moveTo(0, -28); ctx.lineTo(0, 28); ctx.moveTo(-28, 0); ctx.lineTo(28, 0); ctx.stroke();
+  ctx.globalAlpha = 0.85;
+  ctx.fillStyle = '#c98686';
+  ctx.beginPath(); ctx.arc(0, 0, 3, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#ece4d3';
+  [[0,-20],[20,0],[0,20],[-20,0]].forEach(p => {
+    ctx.beginPath(); ctx.arc(p[0], p[1], 1.6, 0, Math.PI*2); ctx.fill();
+  });
+  ctx.restore();
+  ctx.globalAlpha = 1;
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight, align) {
+  align = align || 'center';
+  const lines = [];
+  let line = '';
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '\n') { lines.push(line); line = ''; continue; }
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      // if breaking inside an English word, try to back up to last space
+      const lastSpace = line.lastIndexOf(' ');
+      const isLatin = /[a-zA-Z]/.test(ch);
+      if (lastSpace > 0 && isLatin) {
+        lines.push(line.substring(0, lastSpace));
+        line = line.substring(lastSpace + 1) + ch;
+      } else {
+        lines.push(line);
+        line = ch;
+      }
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  ctx.textAlign = align;
+  let yy = y;
+  for (const l of lines) { ctx.fillText(l, x, yy); yy += lineHeight; }
+  return yy;
+}
+
+function drawHairline(ctx, y, len, color, alpha) {
+  ctx.save();
+  ctx.strokeStyle = color || '#ece4d3';
+  ctx.globalAlpha = alpha != null ? alpha : 0.25;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(CARD_W/2 - len/2, y);
+  ctx.lineTo(CARD_W/2 + len/2, y);
+  ctx.stroke();
+  ctx.restore();
+}
+
+async function exportSoloCard() {
+  await ensureFonts();
+  showSaving('전생을 종이에 옮기는 중…');
+  // small delay so the overlay renders before heavy work
+  await new Promise(r => setTimeout(r, 50));
+
+  const canvas = document.createElement('canvas');
+  canvas.width = CARD_W; canvas.height = CARD_H;
+  const ctx = canvas.getContext('2d');
+
+  drawBackdrop(ctx);
+  drawEmblem(ctx, 540, 200, 1.4);
+
+  // brand
+  ctx.fillStyle = '#c9a961';
+  ctx.font = "500 22px 'Inter', sans-serif";
+  ctx.textAlign = 'center';
+  ctx.fillText('A N T E R I T U S   ·   P R I O R   L I V E S', 540, 320);
+
+  // era tag
+  const era = document.getElementById('r-era').textContent;
+  ctx.fillStyle = '#c9a961';
+  ctx.font = "500 24px 'Inter', sans-serif";
+  ctx.fillText(era, 540, 410);
+
+  // name (Korean italic-feel via serif)
+  const name = document.getElementById('r-name').textContent;
+  ctx.fillStyle = '#ece4d3';
+  ctx.font = "italic 300 88px 'Cormorant Garamond', 'Noto Serif KR', serif";
+  wrapText(ctx, name, 540, 530, 900, 100);
+
+  // orig
+  const nameOrig = document.getElementById('r-name-orig').textContent;
+  ctx.fillStyle = '#c9c1b0';
+  ctx.font = "400 22px 'Inter', sans-serif";
+  ctx.fillText(nameOrig, 540, 670);
+
+  drawHairline(ctx, 730, 220, '#ece4d3', 0.25);
+
+  // verse (English italic) + Korean
+  const verseRaw = document.getElementById('r-verse').textContent.trim();
+  // verseRaw is like: "Wood remembers what hands repeat."— 반복된 손길만이 결을 만든다.
+  // textContent returns combined; let's get from archetype directly via era → look up
+  // Simpler: parse from data attribute we'll add — but for now extract from text
+  ctx.fillStyle = '#ece4d3';
+  ctx.font = "italic 400 36px 'Cormorant Garamond', serif";
+  let yCursor = 830;
+  // parse verse: take everything before "—" as English, rest as Korean
+  const dashIdx = verseRaw.indexOf('—');
+  let verseEn = verseRaw, verseKo = '';
+  if (dashIdx >= 0) {
+    verseEn = verseRaw.substring(0, dashIdx).replace(/^["']|["']$/g, '').trim();
+    verseKo = verseRaw.substring(dashIdx + 1).trim();
+  }
+  yCursor = wrapText(ctx, '"' + verseEn + '"', 540, yCursor, 900, 56);
+  if (verseKo) {
+    ctx.fillStyle = '#c9c1b0';
+    ctx.font = "300 28px 'Noto Sans KR', sans-serif";
+    yCursor = wrapText(ctx, '— ' + verseKo, 540, yCursor + 14, 900, 48);
+  }
+
+  drawHairline(ctx, yCursor + 30, 160, '#ece4d3', 0.18);
+  yCursor += 90;
+
+  // 4 traits in a 2×2
+  const sign = document.getElementById('r-sign').textContent;
+  const energy = document.getElementById('r-energy').textContent;
+  const hue = document.getElementById('r-color').textContent;
+  const elem = document.getElementById('r-element').textContent;
+  const traits = [
+    ['SIGN · 별자리', sign],
+    ['ENERGY · 기운', energy],
+    ['HUE · 당신의 색', hue],
+    ['ELEMENT · 당신의 원소', elem]
+  ];
+  const cellW = 420, cellH = 130;
+  const startX = 540 - cellW;
+  const startY = yCursor;
+  ctx.strokeStyle = 'rgba(236,228,211,0.18)';
+  ctx.lineWidth = 1;
+  // grid lines
+  ctx.beginPath();
+  ctx.moveTo(startX, startY); ctx.lineTo(startX + cellW*2, startY);
+  ctx.moveTo(startX, startY + cellH*2); ctx.lineTo(startX + cellW*2, startY + cellH*2);
+  ctx.moveTo(startX, startY + cellH); ctx.lineTo(startX + cellW*2, startY + cellH);
+  ctx.moveTo(startX + cellW, startY); ctx.lineTo(startX + cellW, startY + cellH*2);
+  ctx.stroke();
+  for (let i = 0; i < traits.length; i++) {
+    const col = i % 2, row = Math.floor(i / 2);
+    const cx = startX + cellW * col + cellW/2;
+    const cy = startY + cellH * row + cellH/2;
+    ctx.fillStyle = '#7d7589';
+    ctx.font = "500 18px 'Inter', sans-serif";
+    ctx.fillText(traits[i][0], cx, cy - 18);
+    ctx.fillStyle = '#ece4d3';
+    ctx.font = "400 30px 'Cormorant Garamond', 'Noto Sans KR', serif";
+    ctx.fillText(traits[i][1], cx, cy + 28);
+  }
+  yCursor = startY + cellH * 2 + 60;
+
+  // Echo Now / legacy — short
+  const legacy = document.getElementById('r-legacy').textContent;
+  ctx.fillStyle = '#c9a961';
+  ctx.font = "500 18px 'Inter', sans-serif";
+  ctx.fillText('E C H O E S   N O W', 540, yCursor);
+  yCursor += 50;
+  ctx.fillStyle = '#ece4d3';
+  ctx.font = "300 26px 'Noto Sans KR', sans-serif";
+  yCursor = wrapText(ctx, legacy, 540, yCursor, 880, 44);
+
+  // footer
+  ctx.fillStyle = '#7d7589';
+  ctx.font = "500 18px 'Inter', sans-serif";
+  ctx.fillText('A N T E R I T U S   ·   전 생', 540, CARD_H - 80);
+
+  // download
+  await downloadCanvas(canvas, 'anteritus-prior-life.png');
+  hideSaving();
+}
+
+async function exportBondCard() {
+  await ensureFonts();
+  showSaving('인연을 종이에 옮기는 중…');
+  await new Promise(r => setTimeout(r, 50));
+
+  const canvas = document.createElement('canvas');
+  canvas.width = CARD_W; canvas.height = CARD_H;
+  const ctx = canvas.getContext('2d');
+
+  drawBackdrop(ctx);
+  drawEmblem(ctx, 540, 200, 1.4);
+
+  ctx.fillStyle = '#c9a961';
+  ctx.font = "500 22px 'Inter', sans-serif";
+  ctx.textAlign = 'center';
+  ctx.fillText('A N T E R I T U S   ·   B O N D', 540, 320);
+
+  // Two persons side by side
+  const aName = document.getElementById('bA-userName').textContent;
+  const aEra = document.getElementById('bA-era').textContent;
+  const aArche = document.getElementById('bA-name').textContent;
+  const aSign = document.getElementById('bA-sign').textContent;
+  const bName = document.getElementById('bB-userName').textContent;
+  const bEra = document.getElementById('bB-era').textContent;
+  const bArche = document.getElementById('bB-name').textContent;
+  const bSign = document.getElementById('bB-sign').textContent;
+
+  function drawSoulMini(x, label, era, arche, sign) {
+    ctx.fillStyle = '#c9c1b0';
+    ctx.font = "400 26px 'Noto Sans KR', sans-serif";
+    ctx.fillText(label, x, 430);
+    ctx.fillStyle = '#c9a961';
+    ctx.font = "500 16px 'Inter', sans-serif";
+    ctx.fillText(era, x, 470);
+    ctx.fillStyle = '#ece4d3';
+    ctx.font = "italic 300 44px 'Cormorant Garamond', 'Noto Serif KR', serif";
+    wrapText(ctx, arche, x, 530, 460, 52);
+    ctx.fillStyle = '#c9c1b0';
+    ctx.font = "300 20px 'Inter', sans-serif";
+    ctx.fillText(sign, x, 660);
+  }
+  drawSoulMini(280, aName, aEra, aArche, aSign);
+  drawSoulMini(800, bName, bEra, bArche, bSign);
+
+  // thread between
+  ctx.strokeStyle = '#c9a961';
+  ctx.globalAlpha = 0.5;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(380, 540);
+  ctx.bezierCurveTo(540, 480, 540, 600, 700, 540);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  drawHairline(ctx, 760, 200, '#ece4d3', 0.25);
+
+  // Score
+  const score = document.getElementById('b-score').textContent;
+  const tier = document.getElementById('b-tier').textContent;
+  ctx.fillStyle = '#c9a961';
+  ctx.font = "italic 400 200px 'Cormorant Garamond', serif";
+  ctx.fillText(score, 540, 980);
+  ctx.fillStyle = '#7d7589';
+  ctx.font = "500 24px 'Inter', sans-serif";
+  ctx.fillText('/ 100', 540, 1020);
+  ctx.fillStyle = '#c9a961';
+  ctx.font = "500 22px 'Inter', sans-serif";
+  ctx.fillText(tier, 540, 1080);
+
+  drawHairline(ctx, 1130, 160, '#ece4d3', 0.18);
+
+  // bond lines
+  let y = 1200;
+  const rows = [
+    ['Element · 원소', document.getElementById('b-elem-quote').textContent, document.getElementById('b-elem-text').textContent],
+    ['Time · 시대 거리', '', document.getElementById('b-time-text').textContent],
+    ['Place · 공간 거리', '', document.getElementById('b-space-text').textContent]
+  ];
+  for (const r of rows) {
+    ctx.fillStyle = '#7d7589';
+    ctx.font = "500 18px 'Inter', sans-serif";
+    ctx.fillText(r[0], 540, y);
+    y += 36;
+    if (r[1]) {
+      ctx.fillStyle = '#c9a961';
+      ctx.font = "italic 400 28px 'Cormorant Garamond', serif";
+      ctx.fillText(r[1], 540, y);
+      y += 44;
+    }
+    ctx.fillStyle = '#ece4d3';
+    ctx.font = "300 24px 'Noto Sans KR', sans-serif";
+    y = wrapText(ctx, r[2], 540, y, 880, 40);
+    y += 36;
+  }
+
+  // narrative (truncated)
+  const narrative = document.getElementById('b-narrative').textContent;
+  drawHairline(ctx, y + 10, 120, '#ece4d3', 0.2);
+  y += 60;
+  ctx.fillStyle = '#ece4d3';
+  ctx.font = "italic 400 26px 'Cormorant Garamond', 'Noto Sans KR', serif";
+  y = wrapText(ctx, narrative, 540, y, 900, 44);
+
+  ctx.fillStyle = '#7d7589';
+  ctx.font = "500 18px 'Inter', sans-serif";
+  ctx.fillText('A N T E R I T U S   ·   인 연 의 실', 540, CARD_H - 80);
+
+  await downloadCanvas(canvas, 'anteritus-bond.png');
+  hideSaving();
+}
+
+async function downloadCanvas(canvas, filename) {
+  return new Promise(resolve => {
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => { URL.revokeObjectURL(url); resolve(); }, 800);
+    }, 'image/png');
+  });
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+document.getElementById('solo-birth').value = '1995-01-01';
+document.getElementById('bondA-birth').value = '1995-01-01';
+document.getElementById('bondB-birth').value = '1990-06-15';
+// Avoid animating souls that already exist from a previous session
+prevSoulIds = new Set(loadStore().souls.map(s => s.id));
+route();
+renderDailyEcho();
+</script>
+</body>
+</html>
