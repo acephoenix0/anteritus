@@ -87,6 +87,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    flex-wrap: wrap;
   }
   .nav .brand {
     font-family: 'Cormorant Garamond', serif;
@@ -123,10 +124,6 @@
   }
   .nav .links a:hover { color: var(--ivory); border-color: var(--line); }
   .nav .links a.active { color: var(--gold); border-color: rgba(201, 169, 97, 0.4); }
-  @media (max-width: 600px) {
-    header.nav { padding: 0.7rem 1rem; flex-direction: column; align-items: flex-start; }
-    .nav .links a { font-size: 0.62rem; padding: 0.3rem 0.5rem; letter-spacing: 0.15em; }
-  }
 
   main {
     position: relative;
@@ -375,11 +372,6 @@
     margin-top: 1rem;
   }
   .mode-card:hover .arrow { color: var(--gold); }
-  @media (max-width: 600px) {
-    .mode-card { grid-template-columns: 1fr; column-gap: 0; padding: 1.4rem 1.4rem 1.2rem; }
-    .mode-card .num { text-align: left; font-size: 1.1rem; padding-top: 0; }
-    .mode-card .arrow { margin-top: 0.8rem; }
-  }
 
   /* ============= FORM ============= */
   .form .step-num {
@@ -683,9 +675,6 @@
   }
   .result-cta .cta-row .btn.solo { flex: 1 1 100%; }
   .result-cta .btn-ghost { margin-top: 0.2rem; }
-  @media (max-width: 480px) {
-    .result-cta .cta-row { flex-direction: column; }
-  }
 
   /* dual-person form */
   .person-block {
@@ -910,9 +899,6 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-  @media (min-width: 720px) {
-    .bond-pair { grid-template-columns: 1fr 1fr; }
   }
   .bond-pair .mini-card {
     background: rgba(255,255,255,0.025);
