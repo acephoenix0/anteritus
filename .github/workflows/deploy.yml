@@ -1,0 +1,58 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'Dockerfile'
+      - 'nginx.conf'
+      - 'cloudbuild.yaml'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: cloud-run-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build & deploy via Cloud Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Auth to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Submit Cloud Build
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          echo "Submitting build with _TAG=$SHA"
+          gcloud builds submit \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --config=cloudbuild.yaml \
+            --substitutions="_TAG=$SHA" \
+            .
+
+      - name: Show deployed URL
+        run: |
+          URL=$(gcloud run services describe anteritus \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region=asia-northeast3 \
+            --format="value(status.url)")
+          echo "Deployed: $URL"
+          echo "### Live Service" >> $GITHUB_STEP_SUMMARY
+          echo "[$URL]($URL)" >> $GITHUB_STEP_SUMMARY
