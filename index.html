@@ -35,6 +35,11 @@
     min-height: 100vh;
     position: relative;
     font-weight: 300;
+    /* Wrap at word boundaries (spaces) — keeps Korean words intact, breaks
+       only when content would otherwise overflow. */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
   }
 
   /* Cosmic gradient backdrop */
