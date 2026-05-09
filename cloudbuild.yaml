@@ -1,19 +1,20 @@
 # Build & deploy Anteritus to Cloud Run via Cloud Build.
-# Run manually with:
+# Manual submit:
 #   gcloud builds submit --config cloudbuild.yaml \
-#     --substitutions=_REGION=asia-northeast3,_REPO=anteritus,_SERVICE=anteritus
-# Or hook to a GitHub trigger and Cloud Build will pass $SHORT_SHA automatically.
+#     --substitutions=_TAG=$(git rev-parse --short HEAD)
+# Or hook to a GitHub trigger; pass _TAG=$SHORT_SHA in trigger substitutions.
 
 substitutions:
   _REGION: asia-northeast3
   _REPO: anteritus
   _SERVICE: anteritus
+  _TAG: latest
 
 options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${SHORT_SHA}'
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
   - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:latest'
 
 steps:
@@ -22,7 +23,7 @@ steps:
     args:
       - build
       - '-t'
-      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${SHORT_SHA}'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
       - '-t'
       - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:latest'
       - .
@@ -41,7 +42,7 @@ steps:
       - run
       - deploy
       - '${_SERVICE}'
-      - '--image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${SHORT_SHA}'
+      - '--image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
       - '--region=${_REGION}'
       - '--platform=managed'
       - '--allow-unauthenticated'
