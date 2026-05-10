@@ -1199,6 +1199,56 @@
   .map-canvas svg .node-group.dim .label { opacity: 0.25; }
   .map-canvas svg .edge.dim { stroke-opacity: 0.08 !important; }
   .map-canvas svg .edge.highlight { stroke: var(--gold) !important; stroke-opacity: 0.95 !important; }
+
+  /* Hover tooltip — desktop only (touch devices use the detail panel) */
+  .map-tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 50;
+    min-width: 180px;
+    max-width: 260px;
+    padding: 0.7rem 0.85rem;
+    background: rgba(10, 12, 20, 0.92);
+    border: 1px solid rgba(201, 169, 97, 0.45);
+    color: var(--ivory);
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  }
+  .map-tooltip.visible { opacity: 1; transform: translateY(0); }
+  .map-tooltip .tt-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ivory);
+    margin-bottom: 0.2rem;
+  }
+  .map-tooltip .tt-era {
+    color: var(--gold);
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .map-tooltip .tt-arche {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.78rem;
+    color: var(--ivory-soft);
+    margin-bottom: 0.3rem;
+  }
+  .map-tooltip .tt-sign {
+    color: var(--mute);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+  /* Hide hover tooltip on touch devices */
+  @media (hover: none) { .map-tooltip { display: none !important; } }
 </style>
 </head>
 <body>
@@ -1646,6 +1696,12 @@
 <footer>· Anteritus · Prior Lives · Soul Map ·</footer>
 
 <div class="saving-overlay" id="saving-overlay"><div class="msg" id="saving-msg">먹이 종이에 번지는 중…</div></div>
+<div class="map-tooltip" id="map-tooltip" aria-hidden="true">
+  <div class="tt-era" id="tt-era">—</div>
+  <div class="tt-name" id="tt-name">—</div>
+  <div class="tt-arche" id="tt-arche">—</div>
+  <div class="tt-sign" id="tt-sign">—</div>
+</div>
 
 <script>
 /* ============================================================
@@ -2463,6 +2519,47 @@ function renderMap() {
   };
 }
 
+/* Hover tooltip — wired once at init, uses event delegation on the SVG */
+function attachMapTooltip() {
+  const svg = document.getElementById('map-svg');
+  const tip = document.getElementById('map-tooltip');
+  if (!svg || !tip) return;
+
+  const show = (e) => {
+    const group = e.target.closest('.node-group');
+    if (!group) return;
+    const store = loadStore();
+    const soul = store.souls.find(s => s.id === group.dataset.id);
+    if (!soul) return;
+    const a = archetypeOf(soul);
+    const sign = SIGNS.find(x => x.key === soul.signKey);
+    document.getElementById('tt-era').textContent = a ? a.era : '';
+    document.getElementById('tt-name').textContent = soul.name;
+    document.getElementById('tt-arche').textContent = a ? a.name : '';
+    document.getElementById('tt-sign').textContent = sign ? `${sign.kr} · ${sign.en} · ${capitalize(sign.element)}` : '';
+    tip.classList.add('visible');
+  };
+  const move = (e) => {
+    if (!tip.classList.contains('visible')) return;
+    const pad = 14;
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    let x = e.clientX + pad, y = e.clientY + pad;
+    if (x + tw > window.innerWidth)  x = e.clientX - tw - pad;
+    if (y + th > window.innerHeight) y = e.clientY - th - pad;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  };
+  const hide = (e) => {
+    if (e && e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.node-group')) return;
+    tip.classList.remove('visible');
+  };
+
+  svg.addEventListener('mouseover', show);
+  svg.addEventListener('mousemove', move);
+  svg.addEventListener('mouseout',  hide);
+  svg.addEventListener('mouseleave', hide);
+}
+
 function elementToAngle(element) {
   // place fire on the right (0°), earth bottom (90°), air left (180°), water top (270°)
   switch (element) {
@@ -3150,6 +3247,7 @@ document.getElementById('bondA-birth').value = '1995-01-01';
 document.getElementById('bondB-birth').value = '1990-06-15';
 // Avoid animating souls that already exist from a previous session
 prevSoulIds = new Set(loadStore().souls.map(s => s.id));
+attachMapTooltip();
 route();
 renderDailyEcho();
 </script>
