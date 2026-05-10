@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1a1c2a"/>
+      <stop offset="100%" stop-color="#0a0c14"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#c9a961" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#c9a961" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Stars -->
+  <g fill="#ece4d3">
+    <circle cx="120"  cy="80"  r="1.2" opacity="0.7"/>
+    <circle cx="200"  cy="180" r="1.5" opacity="0.5"/>
+    <circle cx="340"  cy="100" r="1"   opacity="0.6"/>
+    <circle cx="480"  cy="40"  r="2"   opacity="0.4"/>
+    <circle cx="980"  cy="80"  r="1.5" opacity="0.7"/>
+    <circle cx="1080" cy="240" r="1"   opacity="0.5"/>
+    <circle cx="940"  cy="500" r="1.5" opacity="0.6"/>
+    <circle cx="160"  cy="520" r="1"   opacity="0.5"/>
+    <circle cx="280"  cy="580" r="1.5" opacity="0.7"/>
+    <circle cx="60"   cy="300" r="1.2" opacity="0.4"/>
+    <circle cx="1140" cy="420" r="2"   opacity="0.6"/>
+  </g>
+
+  <!-- Emblem (left-of-center) -->
+  <g transform="translate(220 315)">
+    <circle r="62"  fill="none" stroke="#c9a961" stroke-width="1.4" opacity="0.7"/>
+    <circle r="44"  fill="none" stroke="#c9a961" stroke-width="0.9" opacity="0.5"/>
+    <line x1="0" y1="-62" x2="0" y2="62" stroke="#c9a961" stroke-width="0.7" opacity="0.45"/>
+    <line x1="-62" y1="0" x2="62" y2="0" stroke="#c9a961" stroke-width="0.7" opacity="0.45"/>
+    <circle r="6" fill="#c98686" opacity="0.85"/>
+    <circle cx="0"   cy="-44" r="2.8" fill="#ece4d3"/>
+    <circle cx="44"  cy="0"   r="2.8" fill="#ece4d3"/>
+    <circle cx="0"   cy="44"  r="2.8" fill="#ece4d3"/>
+    <circle cx="-44" cy="0"   r="2.8" fill="#ece4d3"/>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(360 0)">
+    <text x="0" y="220" fill="#c9a961" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500" letter-spacing="8">ANTERITUS · PRIOR LIVES</text>
+    <text x="-6" y="370" fill="#ece4d3" font-family="'Cormorant Garamond', 'Times New Roman', serif" font-style="italic" font-weight="300" font-size="148">Anteritus</text>
+    <text x="0" y="430" fill="#c9c1b0" font-family="'Noto Sans KR', sans-serif" font-size="28" letter-spacing="20" font-weight="300">전 생</text>
+    <text x="0" y="510" fill="#ece4d3" font-family="'Cormorant Garamond', 'Times New Roman', serif" font-style="italic" font-size="30">"You have lived before — find out who, where, and</text>
+    <text x="0" y="548" fill="#c9c1b0" font-family="'Noto Sans KR', sans-serif" font-size="22" font-weight="300">한 번 살았던 그 사람을 만나고, 영혼의 지도를 그립니다.</text>
+  </g>
+</svg>
