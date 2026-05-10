@@ -59,6 +59,55 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
+  /* Visible focus rings for keyboard users — kept gold to match the brand,
+     hidden for pointer-driven focus (mouse) to avoid noise. */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .btn:focus-visible,
+  .btn-ghost:focus-visible,
+  .filter-pill:focus-visible,
+  .mode-card:focus-visible,
+  .saved-pick:focus-visible,
+  .echo-cta:focus-visible {
+    outline-offset: 4px;
+  }
+  input:focus-visible,
+  select:focus-visible {
+    outline-offset: 1px;
+  }
+  /* Skip-to-content link for screen readers / keyboard users */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--gold);
+    color: var(--bg-0);
+    padding: 0.7rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    z-index: 1000;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+
+  /* Respect user's motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+    .ring-outer, .ring-inner, .needle { animation: none !important; }
+    body::after { animation: none !important; }
+  }
+
   body {
     background: var(--bg-0);
     color: var(--ivory);
@@ -1253,9 +1302,11 @@
 </head>
 <body>
 
-<header class="nav">
-  <a href="#home" class="brand" data-route="home">Anteritus<span class="ko">전 생</span></a>
-  <nav class="links">
+<a class="skip-link" href="#main-content">Skip to content · 본문으로 건너뛰기</a>
+
+<header class="nav" role="banner">
+  <a href="#home" class="brand" data-route="home" aria-label="Anteritus 메인으로">Anteritus<span class="ko">전 생</span></a>
+  <nav class="links" role="navigation" aria-label="Primary">
     <a href="#home" data-route="home">Home · 메인</a>
     <a href="#solo" data-route="solo">Solo · 전생 리포트</a>
     <a href="#bond" data-route="bond">Bond · 인연의 실</a>
@@ -1263,7 +1314,7 @@
   </nav>
 </header>
 
-<main>
+<main id="main-content">
   <!-- ===== HOME ===== -->
   <section class="page home active" id="page-home">
     <svg class="emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -1640,17 +1691,17 @@
       <div class="stat"><span class="num" id="m-eras">0</span><span>Eras · 시대</span></div>
     </div>
 
-    <div class="map-controls">
-      <input class="map-search" id="map-search" type="text" placeholder="이름으로 별 찾기 · Search by name" oninput="onMapSearch(this.value)" />
-      <button class="filter-pill active" data-elem="all"   onclick="filterByElement('all')">All</button>
-      <button class="filter-pill"        data-elem="fire"  onclick="filterByElement('fire')">Fire · 불</button>
-      <button class="filter-pill"        data-elem="earth" onclick="filterByElement('earth')">Earth · 흙</button>
-      <button class="filter-pill"        data-elem="air"   onclick="filterByElement('air')">Air · 바람</button>
-      <button class="filter-pill"        data-elem="water" onclick="filterByElement('water')">Water · 물</button>
+    <div class="map-controls" role="toolbar" aria-label="Soul Map filters">
+      <input class="map-search" id="map-search" type="search" aria-label="이름으로 별 찾기" placeholder="이름으로 별 찾기 · Search by name" oninput="onMapSearch(this.value)" />
+      <button class="filter-pill active" data-elem="all"   onclick="filterByElement('all')"   aria-pressed="true">All</button>
+      <button class="filter-pill"        data-elem="fire"  onclick="filterByElement('fire')"  aria-pressed="false">Fire · 불</button>
+      <button class="filter-pill"        data-elem="earth" onclick="filterByElement('earth')" aria-pressed="false">Earth · 흙</button>
+      <button class="filter-pill"        data-elem="air"   onclick="filterByElement('air')"   aria-pressed="false">Air · 바람</button>
+      <button class="filter-pill"        data-elem="water" onclick="filterByElement('water')" aria-pressed="false">Water · 물</button>
     </div>
 
     <div class="map-canvas" id="map-canvas">
-      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" id="map-svg"></svg>
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" id="map-svg" role="img" aria-label="영혼의 지도 — 등록된 영혼들과 인연의 별무리"></svg>
       <div class="empty" id="map-empty">
         <div class="big">The sky is empty.</div>
         <div class="sm">아직 등록된 영혼이 없습니다.<br/>전생 리포트나 인연의 실로 첫 별을 띄워주세요.</div>
@@ -1687,8 +1738,8 @@
     </div>
 
     <div class="map-actions">
-      <button class="btn-ghost" onclick="exportMap()">Export · 내보내기</button>
-      <button class="btn-ghost" onclick="resetMap()" style="color:var(--rose);">Reset · 초기화</button>
+      <button class="btn-ghost" onclick="exportMap()" aria-label="Export soul map as JSON">Export · 내보내기</button>
+      <button class="btn-ghost" onclick="resetMap()" style="color:var(--rose);" aria-label="Reset entire soul map">Reset · 초기화</button>
     </div>
   </section>
 </main>
@@ -2850,7 +2901,9 @@ function onMapSearch(q) {
 function filterByElement(elem) {
   mapElementFilter = elem;
   document.querySelectorAll('.filter-pill').forEach(p => {
-    p.classList.toggle('active', p.dataset.elem === elem);
+    const active = p.dataset.elem === elem;
+    p.classList.toggle('active', active);
+    p.setAttribute('aria-pressed', String(active));
   });
   applyMapVisual();
 }
