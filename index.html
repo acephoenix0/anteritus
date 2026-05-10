@@ -1133,6 +1133,36 @@
   .map-detail .connections .conn {
     color: var(--gold-soft);
   }
+  .map-detail .detail-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.8rem; margin-bottom: 0.4rem; flex-wrap: wrap;
+  }
+  .map-detail .detail-actions {
+    display: flex; gap: 0.4rem;
+  }
+  .map-detail .detail-btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    border: 1px solid var(--line);
+  }
+  .map-detail .detail-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .map-detail .detail-btn-danger:hover { border-color: var(--rose); color: var(--rose); }
+  .map-detail .rename-row {
+    display: flex; gap: 0.5rem; margin-bottom: 0.6rem; align-items: center; flex-wrap: wrap;
+  }
+  .map-detail .rename-input {
+    flex: 1; min-width: 120px;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--ivory);
+    padding: 0.45rem 0.7rem;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .map-detail .rename-input:focus { border-color: var(--gold); }
 
   .map-actions {
     display: flex; gap: 0.8rem; justify-content: flex-end; margin-top: 1.5rem; flex-wrap: wrap;
@@ -1590,7 +1620,18 @@
     </div>
 
     <div class="map-detail" id="map-detail">
-      <div class="name" id="d-name">—</div>
+      <div class="detail-header">
+        <div class="name" id="d-name">—</div>
+        <div class="detail-actions">
+          <button class="btn-ghost detail-btn" onclick="startRenameSoul()" title="Rename soul · 이름 변경" aria-label="Rename soul">✎ Rename</button>
+          <button class="btn-ghost detail-btn detail-btn-danger" onclick="deleteSelectedSoul()" title="Delete this soul · 영혼 삭제" aria-label="Delete soul">✕ Delete</button>
+        </div>
+      </div>
+      <div class="rename-row" id="rename-row" style="display:none;">
+        <input type="text" id="rename-input" class="rename-input" placeholder="새 이름" autocomplete="off" />
+        <button class="btn-ghost detail-btn" onclick="commitRenameSoul()">Save</button>
+        <button class="btn-ghost detail-btn" onclick="cancelRenameSoul()">Cancel</button>
+      </div>
       <div class="info" id="d-info">—</div>
       <div class="connections" id="d-conn">—</div>
     </div>
@@ -2512,7 +2553,73 @@ function resetMap() {
   if (!confirm('정말 모든 영혼과 인연을 지우시겠어요? 되돌릴 수 없습니다.')) return;
   localStorage.removeItem(STORE_KEY);
   selectedNodeId = null;
+  prevSoulIds = new Set();
   renderMap();
+}
+
+/* ============================================================
+   PER-SOUL DELETE + RENAME (operates on selectedNodeId)
+============================================================ */
+function deleteSelectedSoul() {
+  if (!selectedNodeId) return;
+  const store = loadStore();
+  const soul = store.souls.find(s => s.id === selectedNodeId);
+  if (!soul) return;
+  const bondCount = store.bonds.filter(b => b.aId === selectedNodeId || b.bId === selectedNodeId).length;
+  const tail = bondCount > 0 ? ` (${bondCount}개의 인연도 함께 사라집니다)` : '';
+  if (!confirm(`${soul.name}을(를) 별자리에서 지우시겠어요?${tail}`)) return;
+  store.souls = store.souls.filter(s => s.id !== selectedNodeId);
+  store.bonds = store.bonds.filter(b => b.aId !== selectedNodeId && b.bId !== selectedNodeId);
+  saveStore(store);
+  prevSoulIds.delete(selectedNodeId);
+  selectedNodeId = null;
+  document.getElementById('map-detail').classList.remove('visible');
+  renderMap();
+}
+
+function startRenameSoul() {
+  if (!selectedNodeId) return;
+  const store = loadStore();
+  const soul = store.souls.find(s => s.id === selectedNodeId);
+  if (!soul) return;
+  const row = document.getElementById('rename-row');
+  const input = document.getElementById('rename-input');
+  input.value = soul.name;
+  row.style.display = 'flex';
+  input.focus();
+  input.select();
+}
+
+function cancelRenameSoul() {
+  document.getElementById('rename-row').style.display = 'none';
+}
+
+function commitRenameSoul() {
+  if (!selectedNodeId) return;
+  const newName = document.getElementById('rename-input').value.trim();
+  if (!newName) return;
+  const store = loadStore();
+  const soul = store.souls.find(s => s.id === selectedNodeId);
+  if (!soul) return;
+  // id is `${name}@${birth}` — renaming changes the id, so rewrite bonds too
+  const oldId = soul.id;
+  const newId = soulId(newName, soul.birth);
+  if (oldId !== newId && store.souls.some(s => s.id === newId)) {
+    alert('같은 이름·생일의 영혼이 이미 있습니다.');
+    return;
+  }
+  soul.name = newName;
+  soul.id = newId;
+  store.bonds.forEach(b => {
+    if (b.aId === oldId) b.aId = newId;
+    if (b.bId === oldId) b.bId = newId;
+  });
+  saveStore(store);
+  if (prevSoulIds.has(oldId)) { prevSoulIds.delete(oldId); prevSoulIds.add(newId); }
+  selectedNodeId = newId;
+  cancelRenameSoul();
+  renderMap();
+  selectNode(newId);
 }
 
 /* ============================================================
