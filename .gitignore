@@ -18,3 +18,9 @@ claudeCode.bat
 dist/
 build/
 node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*.xlsx
+*.csv
